@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Paws - Inicio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Iconos para la hamburguesa -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- CABECERA FIJA -->
+    <header class="main-header">
+        <div class="container header-flex">
+            <!-- Icono Hamburguesa (Solo móvil) -->
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <!-- Logo -->
+            <div class="logo">
+                <img src="img/leon.jpg" alt="Smart Paws Logo">
+                <span>Smart Paws</span>
+            </div>
+
+            <!-- Navegación -->
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="login.html" onclick="loginVeterinario()">Veterinario</a></li>
+                    <li><a href="login.html" onclick="loginCliente()">Cliente</a></li>
+                    <li><a href="tienda.html">Tienda</a></li>
+                    <li><a href="#especialidad">Especialidad</a></li>
+                    <li><a href="#historia">Historia</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+
+    <!-- SECCIÓN ESPECIALIDAD -->
+    <section id="especialidad" class="section-padding" style="background-color: #f4f4f4;">
+        <div class="container">
+            <h2 style="text-align: center;">Nuestras Especialidades</h2>
+            <div class="grid-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+                <div class="card-especialidad" style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <i class="fas fa-stethoscope" style="font-size: 2rem; color: #2ecc71;"></i>
+                    <h3>Cirugía General</h3>
+                    <p>Médicos colegiados con amplia experiencia.</p>
+                </div>
+                <div class="card-especialidad" style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <i class="fas fa-bone" style="font-size: 2rem; color: #2ecc71;"></i>
+                    <h3>Traumatología</h3>
+                    <p>Cuidado especializado para el sistema óseo de tu mascota.</p>
+                </div>
+                <div class="card-especialidad" style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <i class="fas fa-microscope" style="font-size: 2rem; color: #2ecc71;"></i>
+                    <h3>Laboratorio</h3>
+                    <p>Análisis clínicos inmediatos en nuestra sede de La Paz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SECCIÓN HISTORIA -->
+    <section id="historia" class="section-padding">
+        <div class="container grid-2">
+            <div class="text-content">
+                <h2>Nuestra Historia</h2>
+                <p>Smart Paws nació con la idea de digitalizar la salud animal en La Paz, facilitando la vida de los dueños y el trabajo de los médicos.</p>
+            </div>
+            <div class="image-content">
+                <img src="img/perrogato.jpg" alt="Veterinaria equipo">
+            </div>
+        </div>
+    </section>
+
+    <!---------------------- SECCIÓN TIENDA (Vista previa) -->
+    <section class="shop-preview section-padding">
+        <div class="container">
+            <h2>Productos Disponibles</h2>
+            <p class="info-text">Inicia sesión para realizar compras.</p>
+            
+            <!-- BUSCADOR -->
+            <div class="search-container">
+                <input type="text" id="input-busqueda" placeholder="Buscar productos (ej. Arena para gato)...">
+                <button id="btn-buscar"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+
+            <div class="product-grid" id="contenedor-productos">
+                <!-- Aquí la API cargará los productos -->
+                <p>Cargando productos...</p>
+            </div>
+        </div>
+    </section>
+
+    <!------------------ FOOTER (Contactos y Ubicación) --------------------------->
+<footer class="main-footer">
+    <!-- Franja Superior: Enlaces y Redes -->
+    <div class="footer-top">
+        <div class="container footer-top-flex">
+            <div class="footer-links-top">
+                <a href="#">CONTACTO</a>
+                <a href="#">POLÍTICA DE PRIVACIDAD</a>
+            </div>
+            <div class="footer-social">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-whatsapp"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido Principal del Footer -->
+    <div class="footer-main">
+        <div class="container footer-grid-custom">
+            <!-- Columna 1: Datos de contacto -->
+            <div class="footer-info">
+                <h3>SMART PAWS VETERINARIA</h3>
+                <div class="sucursal">
+                    <p class="city-title">Sede Central - La Paz</p>
+                    <p>Tel. +591 2 2222222 | WhatsApp. +591 70000000</p>
+                    <a href="mailto:contacto@smartpaws.com.bo">contacto@smartpaws.com.bo</a>
+                </div>
+            </div>
+
+            <!-- Columna 2: Certificaciones/Logos -->
+            
+
+            <!-- Columna 3: Boletín -->
+            <div class="footer-newsletter">
+                <h3>INSCRÍBASE AL BOLETÍN</h3>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Su correo">
+                    <button type="button">INSCRÍBASE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón Volver Arriba -->
+    <div class="back-to-top">
+        <a href="#">VOLVER ARRIBA <i class="fas fa-arrow-up"></i></a>
+    </div>
+</footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

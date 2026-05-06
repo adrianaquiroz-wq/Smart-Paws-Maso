@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Mascota</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        .btn-back{
+    display:inline-block;
+    margin-bottom:15px;
+    text-decoration:none;
+    background:#3498db;
+    color:white;
+    padding:8px 12px;
+    border-radius:6px;
+}
+        body { font-family: Arial; background: #f4f7f6; }
+        .container { max-width: 600px; margin: 40px auto; background: #fff; padding: 20px; border-radius: 10px; }
+        form { display: flex; flex-direction: column; gap: 10px; }
+        input, select, textarea { padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
+        button { background: green; color: white; padding: 10px; border: none; cursor: pointer; }
+        .preview img { width: 120px; height: 120px; border-radius: 50%; }
+        .ci-box { display: flex; gap: 10px; }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="panel-vet.html" class="btn-back">⬅ Volver</a>
+
+    <h2>Registrar Mascota</h2>
+
+    <form id="form-mascota" enctype="multipart/form-data">
+
+        <label>CI dueño</label>
+        <div class="ci-box">
+            <input type="number" name="carnetDue" id="masc-cliente" required>
+            <button type="button" onclick="buscarCliente()">Buscar</button>
+        </div>
+
+        <label>Nombre</label>
+        <input type="text" name="nombre" required>
+
+        <label>Fecha nacimiento</label>
+        <input type="date" name="fecha_nacimiento">
+
+        <label>Especie</label>
+        <select id="especie" name="id_especie" onchange="cargarRazas()" required>
+            <option value="">Seleccione especie</option>
+        </select>
+
+        <label>Raza</label>
+        <select id="raza" name="id_raza" required>
+            <option value="">Seleccione raza</option>
+        </select>
+
+        <label>Color</label>
+        <select name="id_color">
+            <option value="1">Negro</option>
+            <option value="2">Blanco</option>
+            <option value="3">Marrón</option>
+        </select>
+
+        <label>Peso</label>
+        <input type="number" name="peso">
+
+        <label>Tamaño</label>
+        <select name="tamano">
+            <option>Pequeño</option>
+            <option>Mediano</option>
+            <option>Grande</option>
+        </select>
+
+        <label>Descripción</label>
+        <textarea name="descripcion"></textarea>
+
+        <label>Alergias</label>
+        <textarea name="alergias"></textarea>
+
+        <label>Foto</label>
+        <input type="file" name="foto" accept="image/*" onchange="previewImg(event)">
+
+        <div class="preview">
+            <img id="img-preview" src="img/default.png">
+        </div>
+
+        <button type="submit">Registrar</button>
+
+    </form>
+
+
+
+</div>
+
+<script src="js/mascota.js"></script>
+
+</body>
+</html>
