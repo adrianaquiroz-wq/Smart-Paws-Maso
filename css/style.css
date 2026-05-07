@@ -1,30 +1,30 @@
 /* ====================================================
-   SMART PAWS — DISEÑO RENOVADO
+   SMART PAWS — DISEÑO RENOVADO
 
-   ==================================================== */
+   ==================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --verde-oscuro:  #1a3328;
-  --verde-medio:   #2d6a4f;
-  --verde-vivo:    #52b788;
-  --verde-claro:   #d8f3dc;
-  --crema:         #faf6f1;
-  --arena:         #ede4d5;
-  --ambar:         #e07b39;
-  --ambar-claro:   #fdebd0;
-  --texto:         #1c2620;
-  --texto-suave:   #5a6b63;
-  --blanco:        #ffffff;
-  --sombra-sm:     0 2px 8px rgba(26,51,40,.10);
-  --sombra-md:     0 6px 24px rgba(26,51,40,.14);
-  --sombra-lg:     0 16px 48px rgba(26,51,40,.18);
-  --radio-sm:      8px;
-  --radio-md:      14px;
-  --radio-lg:      24px;
-  --radio-pill:    999px;
-  --transicion:    0.28s cubic-bezier(.4,0,.2,1);
+  --verde-oscuro:  #1a3328;
+  --verde-medio:   #2d6a4f;
+  --verde-vivo:    #52b788;
+  --verde-claro:   #d8f3dc;
+  --crema:         #faf6f1;
+  --arena:         #ede4d5;
+  --ambar:         #e07b39;
+  --ambar-claro:   #fdebd0;
+  --texto:         #1c2620;
+  --texto-suave:   #5a6b63;
+  --blanco:        #ffffff;
+  --sombra-sm:     0 2px 8px rgba(26,51,40,.10);
+  --sombra-md:     0 6px 24px rgba(26,51,40,.14);
+  --sombra-lg:     0 16px 48px rgba(26,51,40,.18);
+  --radio-sm:      8px;
+  --radio-md:      14px;
+  --radio-lg:      24px;
+  --radio-pill:    999px;
+  --transicion:    0.28s cubic-bezier(.4,0,.2,1);
 }
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -48,11 +48,11 @@ a{color:inherit;text-decoration:none;}
 .menu-toggle{display:none;background:none;border:none;color:var(--blanco);font-size:1.4rem;cursor:pointer;}
 
 @media(max-width:768px){
-  .menu-toggle{display:flex;align-items:center;}
-  .nav-menu{display:none;position:absolute;top:68px;left:0;width:100%;background:var(--verde-oscuro);padding:16px 20px 24px;border-top:1px solid rgba(255,255,255,.1);}
-  .nav-menu.active{display:block;}
-  .nav-menu ul{flex-direction:column;gap:4px;}
-  .nav-menu a{display:block;padding:10px 16px;}
+  .menu-toggle{display:flex;align-items:center;}
+  .nav-menu{display:none;position:absolute;top:68px;left:0;width:100%;background:var(--verde-oscuro);padding:16px 20px 24px;border-top:1px solid rgba(255,255,255,.1);}
+  .nav-menu.active{display:block;}
+  .nav-menu ul{flex-direction:column;gap:4px;}
+  .nav-menu a{display:block;padding:10px 16px;}
 }
 
 /* ── HERO ── */
@@ -150,9 +150,9 @@ a{color:inherit;text-decoration:none;}
 .back-to-top a:hover{color:var(--blanco);}
 
 @media(max-width:768px){
-  .footer-grid-custom{grid-template-columns:1fr;gap:28px;}
-  .footer-top-flex{flex-direction:column;gap:12px;text-align:center;}
-  .newsletter-form{flex-direction:column;}
+  .footer-grid-custom{grid-template-columns:1fr;gap:28px;}
+  .footer-top-flex{flex-direction:column;gap:12px;text-align:center;}
+  .newsletter-form{flex-direction:column;}
 }
 
 /* ── LOGIN / AUTH ── */
@@ -197,11 +197,11 @@ a{color:inherit;text-decoration:none;}
 .header-date{font-size:.8rem;color:var(--texto-suave);background:var(--blanco);padding:6px 14px;border-radius:var(--radio-pill);border:1px solid var(--arena);}
 .menu-toggle{display:none;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--verde-oscuro);}
 @media(max-width:768px){
-  .vet-page{flex-direction:column;}
-  .sidebar{width:100%;position:fixed;left:-100%;top:0;height:100vh;z-index:999;transition:left var(--transicion);}
-  .sidebar.active{left:0;}
-  .main-content{padding:16px;}
-  .menu-toggle{display:block;}
+  .vet-page{flex-direction:column;}
+  .sidebar{width:100%;position:fixed;left:-100%;top:0;height:100vh;z-index:999;transition:left var(--transicion);}
+  .sidebar.active{left:0;}
+  .main-content{padding:16px;}
+  .menu-toggle{display:block;}
 }
 .block{background:var(--blanco);border-radius:var(--radio-md);padding:20px 24px;box-shadow:var(--sombra-sm);border:1px solid var(--arena);margin-bottom:20px;}
 .block h3{font-size:.98rem;margin-bottom:14px;color:var(--verde-oscuro);display:flex;align-items:center;gap:8px;}
@@ -264,5 +264,3 @@ textarea:focus{border-color:var(--verde-vivo);}
 .fade-up.visible{opacity:1;transform:translateY(0);}
 .fade-up:nth-child(2){transition-delay:.1s;}
 .fade-up:nth-child(3){transition-delay:.2s;}
-
-NECEISTO Q ME DES UNO MEJORADO CON ANMACION DE FONDO ALGO MAS IMPACTANTE
