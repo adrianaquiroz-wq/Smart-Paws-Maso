@@ -264,25 +264,6 @@ textarea:focus{border-color:var(--verde-vivo);}
 .fade-up.visible{opacity:1;transform:translateY(0);}
 .fade-up:nth-child(2){transition-delay:.1s;}
 .fade-up:nth-child(3){transition-delay:.2s;}
-SII, pon esto AL FINAL de tu CSS y ya te va a quedar muchísimo más moderno 😭✨
-Te agregué:
-
-* Fondo animado
-* Partículas flotando
-* Efecto glassmorphism
-* Hover premium
-* Brillos
-* Animaciones suaves
-* Glow en botones
-* Fondo dinámico para hero
-* Cards más pro
-
-PEGALO COMPLETO ABAJO DE TODO 👇
-
-```css
-/* ====================================================
-   EFECTOS PREMIUM SMART PAWS
-==================================================== */
 
 /* Fondo animado general */
 body{
@@ -555,4 +536,4 @@ section{
     transform:translateY(0);
   }
 }
-```
+
