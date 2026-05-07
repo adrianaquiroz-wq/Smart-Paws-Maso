@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
 <div class="vet-page">
 
   <!-- SIDEBAR -->
@@ -20,13 +19,16 @@
       <span class="sidebar-tag">Veterinario</span>
     </div>
     <nav class="side-nav">
+      <div class="side-nav-section">Principal</div>
       <a href="#" class="active"><i class="fas fa-home"></i> Panel principal</a>
       <a href="#"><i class="fas fa-search"></i> Buscar paciente</a>
       <a href="#"><i class="fas fa-calendar-alt"></i> Citas del día</a>
+      <div class="side-nav-section">Gestión</div>
       <a href="#"><i class="fas fa-notes-medical"></i> Atenciones</a>
       <a href="registrar_cliente.html"><i class="fas fa-user-plus"></i> Registrar dueño</a>
       <a href="registrar_mascota.html"><i class="fas fa-paw"></i> Registrar mascota</a>
       <a href="#"><i class="fas fa-pills"></i> Inventario</a>
+      <div class="side-nav-section">Cuenta</div>
       <a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
     </nav>
   </aside>
@@ -36,45 +38,74 @@
     <div class="content-header">
       <div style="display:flex;align-items:center;gap:14px;">
         <button id="menu-toggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-        <h1>Gestión de Atenciones</h1>
+        <div>
+          <h1>Panel Principal</h1>
+          <p style="font-size:.8rem;color:var(--texto-suave);margin-top:2px;">Bienvenido de vuelta, Dr. Veterinario</p>
+        </div>
       </div>
       <span class="header-date" id="fecha-hoy"></span>
     </div>
 
-    <!-- CALENDARIO -->
-    <div class="block">
-      <h3><i class="fas fa-calendar-alt" style="color:var(--verde-vivo)"></i> Calendario de citas</h3>
-      <div id="calendario">
-        <p style="color:var(--texto-suave);font-size:.9rem;">Aquí se mostrará el calendario de citas.</p>
+    <!-- STATS CARDS -->
+    <div class="stats-row">
+      <div class="stat-card verde">
+        <div class="stat-card-icon"><i class="fas fa-paw"></i></div>
+        <div class="stat-num">12</div>
+        <div class="stat-label">Mascotas hoy</div>
+        <span class="stat-change up"><i class="fas fa-arrow-up"></i> +3 vs ayer</span>
+      </div>
+      <div class="stat-card ambar">
+        <div class="stat-card-icon"><i class="fas fa-calendar-check"></i></div>
+        <div class="stat-num">5</div>
+        <div class="stat-label">Citas pendientes</div>
+        <span class="stat-change neutral">Próxima: 10:00 AM</span>
+      </div>
+      <div class="stat-card azul">
+        <div class="stat-card-icon"><i class="fas fa-users"></i></div>
+        <div class="stat-num">148</div>
+        <div class="stat-label">Clientes registrados</div>
+        <span class="stat-change up"><i class="fas fa-arrow-up"></i> +2 esta semana</span>
+      </div>
+      <div class="stat-card coral">
+        <div class="stat-card-icon"><i class="fas fa-exclamation-triangle"></i></div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Vacunas pendientes</div>
+        <span class="stat-change neutral">Revisar hoy</span>
       </div>
     </div>
 
-    <!-- MASCOTAS REGISTRADAS -->
-    <div class="block">
-      <h3><i class="fas fa-paw" style="color:var(--verde-vivo)"></i> Mascotas registradas</h3>
-      <div id="lista-mascotas"></div>
-    </div>
-
-    <!-- BUSCADOR -->
-    <div class="search-section">
-      <h3>Buscar por Carnet del Dueño</h3>
-      <div class="search-box">
-        <input type="number" id="busca-ci" placeholder="Ingrese el CI del dueño...">
-        <button onclick="buscarPacientes()"><i class="fas fa-search"></i> Consultar</button>
-      </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <!-- MASCOTAS + CITAS en grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
       <!-- PRÓXIMAS CITAS -->
       <div class="card">
         <h3><i class="fas fa-clock" style="color:var(--ambar)"></i> Próximas Citas</h3>
         <div class="mascota-item">
-          <span><strong>10:00 AM</strong> — Max</span>
-          <span style="font-size:.8rem;color:var(--texto-suave);">Vacuna</span>
+          <div>
+            <span style="font-weight:700;">10:00 AM</span> — Max
+            <span class="status-badge pendiente" style="margin-left:8px;">Vacuna</span>
+          </div>
+          <span style="font-size:.8rem;color:var(--texto-suave);">Pastor Alemán</span>
         </div>
         <div class="mascota-item">
-          <span><strong>11:30 AM</strong> — Luna</span>
-          <span style="font-size:.8rem;color:var(--texto-suave);">Control</span>
+          <div>
+            <span style="font-weight:700;">11:30 AM</span> — Luna
+            <span class="status-badge completado" style="margin-left:8px;">Control</span>
+          </div>
+          <span style="font-size:.8rem;color:var(--texto-suave);">Gato persa</span>
+        </div>
+        <div class="mascota-item">
+          <div>
+            <span style="font-weight:700;">2:00 PM</span> — Toby
+            <span class="status-badge urgente" style="margin-left:8px;">Urgente</span>
+          </div>
+          <span style="font-size:.8rem;color:var(--texto-suave);">Golden Retriever</span>
+        </div>
+        <div class="mascota-item">
+          <div>
+            <span style="font-weight:700;">3:30 PM</span> — Coco
+            <span class="status-badge pendiente" style="margin-left:8px;">Consulta</span>
+          </div>
+          <span style="font-size:.8rem;color:var(--texto-suave);">Loro amazónico</span>
         </div>
       </div>
 
@@ -82,11 +113,38 @@
       <div class="card">
         <h3><i class="fas fa-bell" style="color:var(--ambar)"></i> Notificaciones</h3>
         <div class="mascota-item">
-          <span>⚠️ Max tiene vacuna pendiente</span>
+          <span>⚠️ Max tiene vacuna antirrábica vencida</span>
+          <span class="status-badge urgente">Urgente</span>
         </div>
         <div class="mascota-item">
-          <span>📅 3 citas agendadas hoy</span>
+          <span>📅 5 citas agendadas para hoy</span>
+          <span class="status-badge pendiente">Hoy</span>
         </div>
+        <div class="mascota-item">
+          <span>💊 Stock de amoxicilina bajo</span>
+          <span class="status-badge pendiente">Inventario</span>
+        </div>
+        <div class="mascota-item">
+          <span>✅ Luna — historial actualizado</span>
+          <span class="status-badge completado">Listo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MASCOTAS REGISTRADAS -->
+    <div class="block">
+      <h3><i class="fas fa-paw" style="color:var(--verde-vivo)"></i> Mascotas registradas recientemente</h3>
+      <div id="lista-mascotas">
+        <p style="color:var(--texto-suave);font-size:.88rem;">Cargando mascotas...</p>
+      </div>
+    </div>
+
+    <!-- BUSCADOR -->
+    <div class="search-section">
+      <h3><i class="fas fa-search" style="color:var(--verde-vivo);margin-right:6px;"></i> Buscar por Carnet del Dueño</h3>
+      <div class="search-box">
+        <input type="number" id="busca-ci" placeholder="Ingrese el CI del dueño...">
+        <button onclick="buscarPacientes()"><i class="fas fa-search"></i> Consultar</button>
       </div>
     </div>
 
@@ -103,10 +161,11 @@
     if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target))
       sidebar.classList.remove('active');
   });
-  // Fecha actual
   const fechaEl = document.getElementById('fecha-hoy');
   if (fechaEl) {
-    fechaEl.textContent = new Date().toLocaleDateString('es-BO', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    fechaEl.textContent = new Date().toLocaleDateString('es-BO', {
+      weekday:'long', year:'numeric', month:'long', day:'numeric'
+    });
   }
 </script>
 </body>
