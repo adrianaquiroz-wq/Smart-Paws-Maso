@@ -264,3 +264,295 @@ textarea:focus{border-color:var(--verde-vivo);}
 .fade-up.visible{opacity:1;transform:translateY(0);}
 .fade-up:nth-child(2){transition-delay:.1s;}
 .fade-up:nth-child(3){transition-delay:.2s;}
+SII, pon esto AL FINAL de tu CSS y ya te va a quedar muchísimo más moderno 😭✨
+Te agregué:
+
+* Fondo animado
+* Partículas flotando
+* Efecto glassmorphism
+* Hover premium
+* Brillos
+* Animaciones suaves
+* Glow en botones
+* Fondo dinámico para hero
+* Cards más pro
+
+PEGALO COMPLETO ABAJO DE TODO 👇
+
+```css
+/* ====================================================
+   EFECTOS PREMIUM SMART PAWS
+==================================================== */
+
+/* Fondo animado general */
+body{
+  background:
+    radial-gradient(circle at top left, rgba(82,183,136,.10), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(224,123,57,.08), transparent 30%),
+    var(--crema);
+  background-attachment: fixed;
+  animation:fondoMove 12s ease infinite alternate;
+}
+
+@keyframes fondoMove{
+  from{
+    background-position:0 0, 100% 100%;
+  }
+  to{
+    background-position:10% 5%, 90% 95%;
+  }
+}
+
+/* HERO MÁS LLAMATIVO */
+.hero{
+  position:relative;
+  overflow:hidden;
+}
+
+/* Partículas flotantes */
+.hero::before{
+  animation:floatBg 12s ease-in-out infinite alternate;
+}
+
+.hero::after{
+  animation:rotateCircle 20s linear infinite;
+}
+
+@keyframes floatBg{
+  from{
+    transform:translateY(0px);
+  }
+  to{
+    transform:translateY(-25px);
+  }
+}
+
+@keyframes rotateCircle{
+  from{
+    transform:rotate(0deg);
+  }
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+/* Glow título */
+.hero-text h1{
+  text-shadow:
+    0 0 10px rgba(82,183,136,.15),
+    0 0 20px rgba(82,183,136,.10);
+  animation:titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow{
+  from{
+    text-shadow:
+      0 0 10px rgba(82,183,136,.12),
+      0 0 20px rgba(82,183,136,.08);
+  }
+  to{
+    text-shadow:
+      0 0 18px rgba(82,183,136,.22),
+      0 0 35px rgba(82,183,136,.14);
+  }
+}
+
+/* BOTONES PREMIUM */
+.btn-primary{
+  position:relative;
+  overflow:hidden;
+}
+
+.btn-primary::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.35),
+    transparent
+  );
+  transition:.8s;
+}
+
+.btn-primary:hover::before{
+  left:120%;
+}
+
+.btn-primary:hover{
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:
+    0 10px 30px rgba(224,123,57,.35),
+    0 0 20px rgba(224,123,57,.25);
+}
+
+/* Cards con efecto vidrio */
+.card-especialidad,
+.product-grid .card,
+.form-card,
+.auth-card,
+.block,
+.card{
+  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(255,255,255,.4);
+}
+
+/* Hover más elegante */
+.card-especialidad:hover,
+.product-grid .card:hover{
+  transform:
+    translateY(-10px)
+    scale(1.02);
+}
+
+/* ICONOS flotando */
+.card-icon{
+  animation:floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon{
+  0%{
+    transform:translateY(0px);
+  }
+  50%{
+    transform:translateY(-6px);
+  }
+  100%{
+    transform:translateY(0px);
+  }
+}
+
+/* Barra brillante en navbar */
+.main-header{
+  backdrop-filter:blur(10px);
+  background:rgba(26,51,40,.92);
+}
+
+.main-header::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:1px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(82,183,136,.7),
+    transparent
+  );
+}
+
+/* Links más modernos */
+.nav-menu a{
+  position:relative;
+}
+
+.nav-menu a::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  bottom:4px;
+  width:0;
+  height:2px;
+  background:var(--verde-vivo);
+  transition:.3s;
+  transform:translateX(-50%);
+}
+
+.nav-menu a:hover::after{
+  width:60%;
+}
+
+/* Inputs premium */
+input,
+textarea,
+select{
+  transition:
+    border .3s,
+    box-shadow .3s,
+    transform .2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  transform:scale(1.01);
+}
+
+/* Imagen hero animada */
+.hero-image img{
+  animation:floatPet 5s ease-in-out infinite;
+}
+
+@keyframes floatPet{
+  0%{
+    transform:translateY(0px);
+  }
+  50%{
+    transform:translateY(-10px);
+  }
+  100%{
+    transform:translateY(0px);
+  }
+}
+
+/* Footer más elegante */
+.main-footer{
+  position:relative;
+  overflow:hidden;
+}
+
+.main-footer::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at top right,
+    rgba(82,183,136,.08),
+    transparent 35%);
+  pointer-events:none;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar{
+  width:10px;
+}
+
+::-webkit-scrollbar-track{
+  background:var(--crema);
+}
+
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(
+    var(--verde-vivo),
+    var(--verde-medio)
+  );
+  border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:var(--verde-oscuro);
+}
+
+/* Animación suave global */
+section{
+  animation:fadeSection .8s ease;
+}
+
+@keyframes fadeSection{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+```
