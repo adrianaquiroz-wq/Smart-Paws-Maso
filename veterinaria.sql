@@ -50,13 +50,6 @@ CREATE TABLE `clientes` (
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`carnetDue`) VALUES
-(111222),
-(123123),
-(666999),
-(123456789),
-(192837465),
-(2147483647);
 
 -- --------------------------------------------------------
 
@@ -76,9 +69,7 @@ CREATE TABLE `clientes_mascotas` (
 -- Volcado de datos para la tabla `clientes_mascotas`
 --
 
-INSERT INTO `clientes_mascotas` (`id_registroMasc`, `id_cliente`, `id_mascota`, `fecha_inicio`, `fecha_fin`) VALUES
-(1, 123123, 2, '2026-05-06', NULL),
-(2, 192837465, 3, '2026-05-06', NULL);
+
 
 -- --------------------------------------------------------
 
@@ -146,7 +137,11 @@ INSERT INTO `especies` (`id_especie`, `nombre`) VALUES
 (2, 'Gato'),
 (3, 'Conejo'),
 (4, 'Ave'),
-(5, 'Reptil');
+(5, 'Reptil'),
+(6, 'Roedor'),
+(7, 'Pez'),
+(8, 'Anfibio'),
+(9, 'Hurón');
 
 -- --------------------------------------------------------
 
@@ -172,11 +167,6 @@ CREATE TABLE `mascotas` (
 -- Volcado de datos para la tabla `mascotas`
 --
 
-INSERT INTO `mascotas` (`id_mascota`, `nombre`, `id_color`, `id_raza`, `fecha_nacimiento`, `peso`, `tamano`, `descripcion`, `alergias`, `foto`, `estado`) VALUES
-(1, 'Bobby', 1, 1, '2025-01-01', 12.00, 'Mediano', 'Es muy activo.', 'A las comidas verdes.', '', 'activo'),
-(2, 'Estrella', 1, 3, '2026-01-01', 12.00, 'Mediano', 'Es muy nervioso.', 'A las comidas verdes.', 'img/mascotas/1778074838_pastor-aleman.jpg', 'activo'),
-(3, 'Tommy', 3, 10, '2025-05-05', 3.50, 'Pequeño', 'Tierno\r\nTa mal de su patita', 'Ninguna', 'img/mascotas/1778118906_conejo.jpg', 'activo');
-
 -- --------------------------------------------------------
 
 --
@@ -197,14 +187,6 @@ CREATE TABLE `personas` (
 -- Volcado de datos para la tabla `personas`
 --
 
-INSERT INTO `personas` (`carnet`, `nombre`, `apellido`, `celular`, `direccion`, `usuario`, `contrasena`) VALUES
-(111222, 'Fabiola', 'Yujra Quispe', NULL, 'Av. Colombia', 'faby2001@gmail.com', 'd6db89ef'),
-(123123, 'Martha', 'Yujra', NULL, 'Cota cota', 'mys3005@gmail.com', 'd3223dbc'),
-(666999, 'Clarita', 'Suárez', NULL, 'Av. san pablo', 'clarita2010@gmail.com', '9dae3690'),
-(9244226, 'Adriana', 'Quiroz', '', '', 'adriqy2005@gmail.com', '72062766'),
-(123456789, 'Yawar', 'Quiroz', NULL, 'Cota cota', 'yawar2000@gmail.com', 'bfc97584'),
-(192837465, 'Sebastian', 'Paredes Cáceres', NULL, 'Av. Bolivar', 'sebastian2020@gmail.com', '554d271f'),
-(2147483647, 'Clarita', 'Suárez', NULL, 'Av. san pablo', 'clarita2010@gmail.com', '8cef5b9d');
 
 -- --------------------------------------------------------
 
@@ -250,7 +232,38 @@ INSERT INTO `razas` (`id_raza`, `nombre`, `id_especie`) VALUES
 (12, 'Canario', 4),
 (13, 'Loro Amazónico', 4),
 (14, 'Iguana Verde', 5),
-(15, 'Gecko Leopardo', 5);
+(15, 'Gecko Leopardo', 5),
+(16, 'Golden Retriever', 1),
+(17, 'Boxer', 1),
+(18, 'Dachshund (Salchicha)', 1),
+(19, 'Siberian Husky', 1),
+-- Gatos (id_especie: 2)
+(20, 'Ragdoll', 2),
+(21, 'Esfinge (Sphynx)', 2),
+(22, 'Ruso Azul', 2),
+-- Conejos (id_especie: 3)
+(23, 'Belier', 3),
+(24, 'Angora', 3),
+-- Aves (id_especie: 4)
+(25, 'Cacatúa', 4),
+(26, 'Periquito Australiano', 4),
+(27, 'Agapornis', 4),
+-- Reptiles (id_especie: 5)
+(28, 'Tortuga de Florida', 5),
+(29, 'Dragón Barbudo', 5),
+-- Roedores (id_especie: 6)
+(30, 'Hamster Sirio', 6),
+(31, 'Cobaya (Cuy)', 6),
+(32, 'Chinchilla', 6),
+-- Peces (id_especie: 7)
+(33, 'Goldfish', 7),
+(34, 'Betta', 7),
+-- Anfibios (id_especie: 8)
+(35, 'Axolote', 8),
+(36, 'Rana de Ojos Rojos', 8),
+-- Hurones (id_especie: 9)
+(37, 'Sable', 9),
+(38, 'Albino', 9);
 
 -- --------------------------------------------------------
 
@@ -267,8 +280,6 @@ CREATE TABLE `veterinarios` (
 -- Volcado de datos para la tabla `veterinarios`
 --
 
-INSERT INTO `veterinarios` (`carnetVet`, `especialidad`) VALUES
-(9244226, 'General');
 
 --
 -- Índices para tablas volcadas
