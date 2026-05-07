@@ -1,126 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Registrar Cliente</title>
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        body { font-family: Arial; background: #f4f7f6; }
-
-        .header {
-            background: #2c3e50;
-            color: white;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 40px auto;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
-
-        button {
-            margin-top: 15px;
-            width: 100%;
-            padding: 12px;
-            background: #2ecc71;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
-    width: 300px;
-    animation: aparecer 0.3s ease;
-}
-
-.modal-content h3 {
-    margin-bottom: 10px;
-}
-
-.modal-content button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: #2ecc71;
-    border: none;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.hidden {
-    display: none;
-}
-
-@keyframes aparecer {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Paws — Registrar Cliente</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="form-page">
 
-<div class="header">
-    <h3>Registrar Cliente</h3>
-    <a href="panel-vet.html" style="color:white;">⬅ Volver</a>
-</div>
+  <div class="form-topbar">
+    <h3><i class="fas fa-user-plus" style="margin-right:8px;"></i>Registrar Cliente</h3>
+    <a href="panel-vet.html"><i class="fas fa-arrow-left"></i> Volver al panel</a>
+  </div>
 
-<div class="container">
-    <form id="form-cliente">
-    
-    <input type="number" name="carnetDue" id="cli-carnet" placeholder="Carnet" required>
-
-    <input type="text" name="nombre" id="cli-nombre" placeholder="Nombre" required>
-
-    <input type="text" name="apellido" id="cli-apellido" placeholder="Apellido" required>
-
-    <input type="email" name="usuario" id="cli-usuario" placeholder="Correo" required>
-
-    <input type="date" name="fecha_nacimiento" id="cli-nacimiento" required>
-
-    <input type="text" name="direccion" id="cli-direccion" placeholder="Dirección" required>
-
-    <button type="submit">Registrar Cliente</button>
-</form>
-<div id="modal-exito" class="modal hidden">
-    <div class="modal-content">
-        <h3>✅ Cliente registrado</h3>
-        <p id="modal-info"></p>
-        <button onclick="cerrarModal()">Continuar</button>
+  <div class="form-body">
+    <div class="form-card">
+      <h2>Nuevo cliente</h2>
+      <p class="form-subtitle">Completa los datos del dueño de la mascota.</p>
+      <form id="form-cliente" class="field-group">
+        <div class="field">
+          <label>Carnet de identidad</label>
+          <input type="number" name="carnetDue" id="cli-carnet" placeholder="Ej: 12345678" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Nombre</label>
+            <input type="text" name="nombre" id="cli-nombre" placeholder="Juan" required>
+          </div>
+          <div class="field">
+            <label>Apellido</label>
+            <input type="text" name="apellido" id="cli-apellido" placeholder="Pérez" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>Correo electrónico</label>
+          <input type="email" name="usuario" id="cli-usuario" placeholder="juan@correo.com" required>
+        </div>
+        <div class="field">
+          <label>Fecha de nacimiento</label>
+          <input type="date" name="fecha_nacimiento" id="cli-nacimiento" required>
+        </div>
+        <div class="field">
+          <label>Dirección</label>
+          <input type="text" name="direccion" id="cli-direccion" placeholder="Av. Ejemplo 123, La Paz" required>
+        </div>
+        <button type="submit" class="btn-submit">
+          <i class="fas fa-user-check" style="margin-right:8px;"></i>Registrar cliente
+        </button>
+      </form>
     </div>
-</div>
-</div>
+  </div>
 
-<script src="js/cliente.js"></script>
+  <!-- Modal éxito -->
+  <div id="modal-exito" class="modal hidden">
+    <div class="modal-content">
+      <div style="font-size:2.8rem;margin-bottom:12px;">✅</div>
+      <h3>Cliente registrado</h3>
+      <p id="modal-info"></p>
+      <button onclick="cerrarModal()">Continuar</button>
+    </div>
+  </div>
+
+  <script src="js/cliente.js"></script>
 </body>
 </html>
