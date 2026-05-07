@@ -1,105 +1,107 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Registrar Mascota</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <style>
-        .btn-back{
-    display:inline-block;
-    margin-bottom:15px;
-    text-decoration:none;
-    background:#3498db;
-    color:white;
-    padding:8px 12px;
-    border-radius:6px;
-}
-        body { font-family: Arial; background: #f4f7f6; }
-        .container { max-width: 600px; margin: 40px auto; background: #fff; padding: 20px; border-radius: 10px; }
-        form { display: flex; flex-direction: column; gap: 10px; }
-        input, select, textarea { padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
-        button { background: green; color: white; padding: 10px; border: none; cursor: pointer; }
-        .preview img { width: 120px; height: 120px; border-radius: 50%; }
-        .ci-box { display: flex; gap: 10px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Paws — Registrar Mascota</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+<body class="form-page">
 
-<body>
+  <div class="form-topbar">
+    <h3><i class="fas fa-paw" style="margin-right:8px;"></i>Registrar Mascota</h3>
+    <a href="panel-vet.html"><i class="fas fa-arrow-left"></i> Volver al panel</a>
+  </div>
 
-<div class="container">
+  <div class="form-body">
+    <div class="form-card">
+      <h2>Nueva mascota</h2>
+      <p class="form-subtitle">Completa la información del paciente.</p>
+      <form id="form-mascota" enctype="multipart/form-data" class="field-group">
 
-    <a href="panel-vet.html" class="btn-back">⬅ Volver</a>
-
-    <h2>Registrar Mascota</h2>
-
-    <form id="form-mascota" enctype="multipart/form-data">
-
-        <label>CI dueño</label>
-        <div class="ci-box">
-            <input type="number" name="carnetDue" id="masc-cliente" required>
-            <button type="button" onclick="buscarCliente()">Buscar</button>
+        <div class="field">
+          <label>CI del dueño</label>
+          <div class="ci-box">
+            <input type="number" name="carnetDue" id="masc-cliente" placeholder="Ingrese el CI..." required>
+            <button type="button" onclick="buscarCliente()"><i class="fas fa-search"></i> Buscar</button>
+          </div>
         </div>
 
-        <label>Nombre</label>
-        <input type="text" name="nombre" required>
-
-        <label>Fecha nacimiento</label>
-        <input type="date" name="fecha_nacimiento">
-
-        <label>Especie</label>
-        <select id="especie" name="id_especie" onchange="cargarRazas()" required>
-            <option value="">Seleccione especie</option>
-        </select>
-
-        <label>Raza</label>
-        <select id="raza" name="id_raza" required>
-            <option value="">Seleccione raza</option>
-        </select>
-
-        <label>Color</label>
-        <select name="id_color">
-            <option value="1">Negro</option>
-            <option value="2">Blanco</option>
-            <option value="3">Marrón</option>
-        </select>
-
-        <label>Peso</label>
-        <input type="number" name="peso">
-
-        <label>Tamaño</label>
-        <select name="tamano">
-            <option>Pequeño</option>
-            <option>Mediano</option>
-            <option>Grande</option>
-        </select>
-
-        <label>Descripción</label>
-        <textarea name="descripcion"></textarea>
-
-        <label>Alergias</label>
-        <textarea name="alergias"></textarea>
-
-        <label>Foto</label>
-        <input type="file" name="foto" accept="image/*" onchange="previewImg(event)">
-
-        <div class="preview">
-            <img id="img-preview" src="img/default.png">
+        <div class="field">
+          <label>Nombre de la mascota</label>
+          <input type="text" name="nombre" placeholder="Ej: Max" required>
         </div>
 
-        <button type="submit">Registrar</button>
+        <div class="field">
+          <label>Fecha de nacimiento</label>
+          <input type="date" name="fecha_nacimiento">
+        </div>
 
-    </form>
+        <div class="field-row">
+          <div class="field">
+            <label>Especie</label>
+            <select id="especie" name="id_especie" onchange="cargarRazas()" required>
+              <option value="">Seleccione...</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Raza</label>
+            <select id="raza" name="id_raza" required>
+              <option value="">Seleccione...</option>
+            </select>
+          </div>
+        </div>
 
+        <div class="field-row">
+          <div class="field">
+            <label>Color</label>
+            <select name="id_color">
+              <option value="1">Negro</option>
+              <option value="2">Blanco</option>
+              <option value="3">Marrón</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Tamaño</label>
+            <select name="tamano">
+              <option>Pequeño</option>
+              <option>Mediano</option>
+              <option>Grande</option>
+            </select>
+          </div>
+        </div>
 
+        <div class="field">
+          <label>Peso (kg)</label>
+          <input type="number" name="peso" placeholder="Ej: 5.2" step="0.1">
+        </div>
 
-</div>
+        <div class="field">
+          <label>Descripción</label>
+          <textarea name="descripcion" placeholder="Características generales..."></textarea>
+        </div>
 
-<script src="js/mascota.js"></script>
+        <div class="field">
+          <label>Alergias conocidas</label>
+          <textarea name="alergias" placeholder="Ninguna / Detallar..."></textarea>
+        </div>
 
+        <div class="field">
+          <label>Foto de la mascota</label>
+          <input type="file" name="foto" accept="image/*" onchange="previewImg(event)">
+          <div class="preview">
+            <img id="img-preview" src="img/default.png" alt="Vista previa">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          <i class="fas fa-paw" style="margin-right:8px;"></i>Registrar mascota
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/mascota.js"></script>
 </body>
 </html>
