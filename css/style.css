@@ -213,7 +213,8 @@ a{color:inherit;text-decoration:none;}
 .product-grid .card .price{color:var(--ambar);font-weight:800;font-size:1.05rem;}
 
 /* FOOTER */
-.main-footer{background:var(--negro);color:rgba(255,255,255,.72);}
+.main-footer{ background:#2d6a4f;
+}
 .footer-top{border-bottom:1px solid rgba(255,255,255,.07);padding:20px 0;}
 .footer-top-flex{display:flex;justify-content:space-between;align-items:center;}
 .footer-links-top a{color:rgba(255,255,255,.42);font-size:.74rem;margin-right:24px;letter-spacing:.8px;text-transform:uppercase;transition:var(--transicion);}
