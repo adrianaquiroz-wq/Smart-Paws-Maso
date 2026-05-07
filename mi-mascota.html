@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Paws — Mi Panel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="vet-page"> <!-- Mantenemos la clase para usar el mismo CSS -->
+
+  <!-- SIDEBAR DUEÑO -->
+  <aside class="sidebar" id="sidebar">
+    <div class="vet-info">
+      <img src="img/dueno.jpg" alt="Usuario" class="avatar">
+      <h3 id="nombre-dueno">Cargando...</h3>
+      <span class="sidebar-tag">Dueño de Mascota</span>
+    </div>
+
+    <nav class="side-nav">
+      <a href="#" class="active"><i class="fas fa-paw"></i> Mis Mascotas</a>
+      <a href="#agendar-cita"><i class="fas fa-calendar-plus"></i> Agendar Cita</a>
+      <a href="#historial-global"><i class="fas fa-file-medical"></i> Historial Médico</a>
+      <a href="php/logout.php" class="logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-content">
+    <div class="content-header">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <button id="menu-toggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+        <div>
+          <h1 id="saludo-dueno">¡Hola!</h1>
+          <p style="font-size:.8rem;color:var(--texto-suave);margin-top:2px;">Gestiona la salud de tus peluditos desde aquí.</p>
+        </div>
+      </div>
+      <span class="header-date" id="fecha-hoy"></span>
+    </div>
+
+    <!-- MIS MASCOTAS GRID -->
+    <div class="block">
+      <h3><i class="fas fa-dog" style="color:var(--verde-vivo)"></i> Mis Consentidos</h3>
+      <div id="lista-mis-mascotas" class="stats-row" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+        <!-- Se llena con JS -->
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <!-- PRÓXIMAS CITAS DEL DUEÑO -->
+      <div class="card">
+        <h3><i class="fas fa-clock" style="color:var(--ambar)"></i> Mis Citas Programadas</h3>
+        <div id="citas-dueno">
+          <p style="font-size: .9rem; color: gray;">No tienes citas próximas.</p>
+        </div>
+      </div>
+
+      <!-- ACCESO RÁPIDO -->
+      <div class="card">
+        <h3><i class="fas fa-star" style="color:var(--coral)"></i> Acciones Rápidas</h3>
+        <button class="btn-principal" style="width:100%; margin-bottom:10px;" onclick="location.href='#agendar-cita'">
+            <i class="fas fa-calendar-alt"></i> Agendar Nueva Cita
+        </button>
+        <button class="btn-secundario" style="width:100%;">
+            <i class="fas fa-envelope"></i> Contactar Veterinario
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/cliente.js"></script>
+<script>
+    // Lógica del menú móvil (la misma que tenías)
+    const toggleBtn = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    toggleBtn.addEventListener('click', () => sidebar.classList.toggle('active'));
+    
+    document.getElementById('fecha-hoy').textContent = new Date().toLocaleDateString('es-BO', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+</script>
+</body>
+</html>
