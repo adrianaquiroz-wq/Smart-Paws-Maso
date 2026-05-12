@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2026 a las 05:31:22
+-- Tiempo de generación: 12-05-2026 a las 15:51:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,11 +29,28 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `atenciones` (
   `id_atencion` int(11) NOT NULL,
+  `id_cita` int(11) DEFAULT NULL,
   `fecha` date NOT NULL,
   `descripcion` varchar(80) DEFAULT NULL,
   `prox_fecha` date DEFAULT NULL,
   `id_mascota` int(11) DEFAULT NULL,
   `carnetVet` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `citas`
+--
+
+CREATE TABLE `citas` (
+  `id_cita` int(11) NOT NULL,
+  `id_mascota` int(11) NOT NULL,
+  `carnetDue` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  `motivo` varchar(100) DEFAULT NULL,
+  `estado` varchar(20) DEFAULT 'Pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -50,6 +67,15 @@ CREATE TABLE `clientes` (
 -- Volcado de datos para la tabla `clientes`
 --
 
+INSERT INTO `clientes` (`carnetDue`) VALUES
+(111222),
+(123123),
+(666999),
+(789987),
+(123456789),
+(192837465),
+(999111999),
+(2147483647);
 
 -- --------------------------------------------------------
 
@@ -69,7 +95,12 @@ CREATE TABLE `clientes_mascotas` (
 -- Volcado de datos para la tabla `clientes_mascotas`
 --
 
-
+INSERT INTO `clientes_mascotas` (`id_registroMasc`, `id_cliente`, `id_mascota`, `fecha_inicio`, `fecha_fin`) VALUES
+(1, 123123, 2, '2026-05-06', NULL),
+(2, 192837465, 3, '2026-05-06', NULL),
+(3, 192837465, 4, '2026-05-07', NULL),
+(4, 789987, 5, '2026-05-07', NULL),
+(5, 999111999, 6, '2026-05-07', NULL);
 
 -- --------------------------------------------------------
 
@@ -137,11 +168,7 @@ INSERT INTO `especies` (`id_especie`, `nombre`) VALUES
 (2, 'Gato'),
 (3, 'Conejo'),
 (4, 'Ave'),
-(5, 'Reptil'),
-(6, 'Roedor'),
-(7, 'Pez'),
-(8, 'Anfibio'),
-(9, 'Hurón');
+(5, 'Reptil');
 
 -- --------------------------------------------------------
 
@@ -167,6 +194,14 @@ CREATE TABLE `mascotas` (
 -- Volcado de datos para la tabla `mascotas`
 --
 
+INSERT INTO `mascotas` (`id_mascota`, `nombre`, `id_color`, `id_raza`, `fecha_nacimiento`, `peso`, `tamano`, `descripcion`, `alergias`, `foto`, `estado`) VALUES
+(1, 'Bobby', 1, 1, '2025-01-01', 12.00, 'Mediano', 'Es muy activo.', 'A las comidas verdes.', '', 'activo'),
+(2, 'Estrella', 1, 3, '2026-01-01', 12.00, 'Mediano', 'Es muy nervioso.', 'A las comidas verdes.', 'img/mascotas/1778074838_pastor-aleman.jpg', 'activo'),
+(3, 'Tommy', 3, 10, '2025-05-05', 3.50, 'Pequeño', 'Tierno\r\nTa mal de su patita', 'Ninguna', 'img/mascotas/1778118906_conejo.jpg', 'activo'),
+(4, 'Pancita', 2, 5, '2020-01-01', 5.00, 'Mediano', 'Es muy uraño', 'Ninguna', 'img/mascotas/1778128494_leon.jpg', 'activo'),
+(5, 'Chimuelo', 3, 12, '2020-02-02', 7.00, 'Mediano', '', '', 'img/mascotas/1778156261_canario.jpg', 'activo'),
+(6, 'Baconsito', 1, 14, '2020-06-06', 5.00, 'Mediano', '', '', 'img/mascotas/1778165009_iguana.jpg', 'activo');
+
 -- --------------------------------------------------------
 
 --
@@ -187,6 +222,16 @@ CREATE TABLE `personas` (
 -- Volcado de datos para la tabla `personas`
 --
 
+INSERT INTO `personas` (`carnet`, `nombre`, `apellido`, `celular`, `direccion`, `usuario`, `contrasena`) VALUES
+(111222, 'Fabiola', 'Yujra Quispe', NULL, 'Av. Colombia', 'faby2001@gmail.com', 'd6db89ef'),
+(123123, 'Martha', 'Yujra', NULL, 'Cota cota', 'mys3005@gmail.com', 'd3223dbc'),
+(666999, 'Clarita', 'Suárez', NULL, 'Av. san pablo', 'clarita2010@gmail.com', '9dae3690'),
+(789987, 'Luis', 'Quiroga', NULL, 'Av. Saavedra', 'luis2005@gmail.com', '18d2bf7b'),
+(9244226, 'Adriana', 'Quiroz', '', '', 'adriqy2005@gmail.com', '72062766'),
+(123456789, 'Yawar', 'Quiroz', NULL, 'Cota cota', 'yawar2000@gmail.com', 'bfc97584'),
+(192837465, 'Sebastian', 'Paredes Cáceres', NULL, 'Av. Bolivar', 'sebastian2020@gmail.com', '554d271f'),
+(999111999, 'Fabricio', 'Choquebolqueta', NULL, 'Av. America', 'fabricio2005@gmail.com', '2fb1cab5'),
+(2147483647, 'Clarita', 'Suárez', NULL, 'Av. san pablo', 'clarita2010@gmail.com', '8cef5b9d');
 
 -- --------------------------------------------------------
 
@@ -232,38 +277,7 @@ INSERT INTO `razas` (`id_raza`, `nombre`, `id_especie`) VALUES
 (12, 'Canario', 4),
 (13, 'Loro Amazónico', 4),
 (14, 'Iguana Verde', 5),
-(15, 'Gecko Leopardo', 5),
-(16, 'Golden Retriever', 1),
-(17, 'Boxer', 1),
-(18, 'Dachshund (Salchicha)', 1),
-(19, 'Siberian Husky', 1),
--- Gatos (id_especie: 2)
-(20, 'Ragdoll', 2),
-(21, 'Esfinge (Sphynx)', 2),
-(22, 'Ruso Azul', 2),
--- Conejos (id_especie: 3)
-(23, 'Belier', 3),
-(24, 'Angora', 3),
--- Aves (id_especie: 4)
-(25, 'Cacatúa', 4),
-(26, 'Periquito Australiano', 4),
-(27, 'Agapornis', 4),
--- Reptiles (id_especie: 5)
-(28, 'Tortuga de Florida', 5),
-(29, 'Dragón Barbudo', 5),
--- Roedores (id_especie: 6)
-(30, 'Hamster Sirio', 6),
-(31, 'Cobaya (Cuy)', 6),
-(32, 'Chinchilla', 6),
--- Peces (id_especie: 7)
-(33, 'Goldfish', 7),
-(34, 'Betta', 7),
--- Anfibios (id_especie: 8)
-(35, 'Axolote', 8),
-(36, 'Rana de Ojos Rojos', 8),
--- Hurones (id_especie: 9)
-(37, 'Sable', 9),
-(38, 'Albino', 9);
+(15, 'Gecko Leopardo', 5);
 
 -- --------------------------------------------------------
 
@@ -280,6 +294,8 @@ CREATE TABLE `veterinarios` (
 -- Volcado de datos para la tabla `veterinarios`
 --
 
+INSERT INTO `veterinarios` (`carnetVet`, `especialidad`) VALUES
+(9244226, 'General');
 
 --
 -- Índices para tablas volcadas
@@ -291,7 +307,16 @@ CREATE TABLE `veterinarios` (
 ALTER TABLE `atenciones`
   ADD PRIMARY KEY (`id_atencion`),
   ADD KEY `id_mascota` (`id_mascota`),
-  ADD KEY `carnetVet` (`carnetVet`);
+  ADD KEY `carnetVet` (`carnetVet`),
+  ADD KEY `fk_atencion_cita` (`id_cita`);
+
+--
+-- Indices de la tabla `citas`
+--
+ALTER TABLE `citas`
+  ADD PRIMARY KEY (`id_cita`),
+  ADD KEY `fk_cita_mascota` (`id_mascota`),
+  ADD KEY `fk_cita_cliente` (`carnetDue`);
 
 --
 -- Indices de la tabla `clientes`
@@ -372,10 +397,16 @@ ALTER TABLE `atenciones`
   MODIFY `id_atencion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `citas`
+--
+ALTER TABLE `citas`
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `clientes_mascotas`
 --
 ALTER TABLE `clientes_mascotas`
-  MODIFY `id_registroMasc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_registroMasc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `colores`
@@ -399,7 +430,7 @@ ALTER TABLE `especies`
 -- AUTO_INCREMENT de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -422,7 +453,15 @@ ALTER TABLE `razas`
 --
 ALTER TABLE `atenciones`
   ADD CONSTRAINT `atenciones_ibfk_1` FOREIGN KEY (`id_mascota`) REFERENCES `mascotas` (`id_mascota`),
-  ADD CONSTRAINT `atenciones_ibfk_2` FOREIGN KEY (`carnetVet`) REFERENCES `veterinarios` (`carnetVet`);
+  ADD CONSTRAINT `atenciones_ibfk_2` FOREIGN KEY (`carnetVet`) REFERENCES `veterinarios` (`carnetVet`),
+  ADD CONSTRAINT `fk_atencion_cita` FOREIGN KEY (`id_cita`) REFERENCES `citas` (`id_cita`);
+
+--
+-- Filtros para la tabla `citas`
+--
+ALTER TABLE `citas`
+  ADD CONSTRAINT `fk_cita_cliente` FOREIGN KEY (`carnetDue`) REFERENCES `clientes` (`carnetDue`),
+  ADD CONSTRAINT `fk_cita_mascota` FOREIGN KEY (`id_mascota`) REFERENCES `mascotas` (`id_mascota`);
 
 --
 -- Filtros para la tabla `clientes`
