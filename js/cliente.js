@@ -92,11 +92,19 @@ function verHistorial(id) { window.location.href = `historial-cliente.html?id=${
 
 function agendarCita(id = '') { 
     const modal = document.getElementById('modal-cita');
+    const select = document.getElementById('select-mascotas');
+
     if (modal) {
         modal.classList.remove('hidden');
-        const select = document.getElementById('select-mascotas');
-        if (select && id !== '') {
-            select.value = id;
+        
+        if (select) {
+            if (id !== '') {
+                // Entra desde una mascota específica: bloqueamos el select en esa mascota
+                select.value = id;
+            } else {
+                // Entra desde el sidebar: dejamos que elija cualquiera
+                select.value = ""; 
+            }
         }
     }
 }
@@ -114,35 +122,25 @@ function verHistorial(id) {
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. Cargar Perfil y Llenar Select de Mascotas
-    // Nota: Usamos obtener_perfil.php que es el que devuelve el array de mascotas
-    fetch('php/obtener_perfil.php')
+    // 1. Cargar Perfil (Nombre y Saludo)
+    fetch('php/get_perfil.php')
         .then(res => res.json())
         .then(data => {
             if (!data.error) {
-                // Actualizar textos de saludo
                 const nombreEl = document.getElementById('nombre-dueno');
                 const saludoEl = document.getElementById('saludo-dueno');
                 
                 if (nombreEl) nombreEl.textContent = data.nombre;
                 if (saludoEl) saludoEl.textContent = `¡Hola, ${data.nombre.split(' ')[0]}! 👋`;
-                
-                // Llenar el SELECT del modal
-                const select = document.getElementById('select-mascotas');
-                if (select && data.mascotas) {
-                    select.innerHTML = '<option value="">Selecciona una mascota</option>';
-                    data.mascotas.forEach(m => {
-                        select.innerHTML += `<option value="${m.id_mascota}">${m.nombre}</option>`;
-                    });
-                }
             }
         })
         .catch(err => console.error("Error cargando perfil:", err));
 
-    // 2. Cargar las Tarjetas de Mascotas (Grid)
-    cargarMisMascotas();
+    // 2. Cargar las Tarjetas de Mascotas Y el Select del Modal
+    // Llamamos a esta función que ahora hará ambas tareas
+    cargarMisMascotasYSelect();
 
-    // 3. Manejo del Formulario de Citas
+    // 3. Manejo del Formulario de Citas (Se mantiene igual)
     const formCita = document.getElementById('form-agendar-cita');
     if (formCita) {
         formCita.addEventListener('submit', (e) => {
@@ -164,41 +162,57 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-
-    // 4. Toggle Sidebar
-    /*const toggleBtn = document.getElementById('menu-toggle');
-    const sidebar = document.getElementById('sidebar');
-    if (toggleBtn && sidebar) {
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-        });
-    }*/
 });
-
-function cargarMisMascotas() {
+// NUEVA VERSIÓN DE TU FUNCIÓN PARA LLENAR EL SELECT
+// NUEVA VERSIÓN OFICIAL DE TU FUNCIÓN
+function cargarMisMascotasYSelect() {
+    
+    // 1. CARGAR MASCOTAS (Para el Select y las Tarjetas)
     fetch("php/get_mis_mascotas.php")
     .then(res => res.json())
     .then(data => {
+        const selectMascota = document.getElementById('select-mascotas');
         const contenedor = document.getElementById("lista-mis-mascotas");
-        if (!contenedor) return;
-        contenedor.innerHTML = "";
 
-        if (!data || data.length === 0) {
-            contenedor.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:gray;">No tienes mascotas vinculadas.</p>`;
-            return;
+        // Llenamos el select de mascotas en el modal
+        if (selectMascota) {
+            selectMascota.innerHTML = '<option value="" disabled selected>Selecciona una mascota</option>';
+            data.forEach(m => {
+                selectMascota.innerHTML += `<option value="${m.id_mascota}">${m.nombre}</option>`;
+            });
         }
 
-        data.forEach(m => {
-            contenedor.innerHTML += `
+        // Llenamos las tarjetas (Solo con botón de Historial)
+        if (contenedor) {
+            contenedor.innerHTML = "";
+            data.forEach(m => {
+                contenedor.innerHTML += `
                 <div class="card" style="text-align:center; padding:20px; background:white; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.05);">
-                    <img src="${m.foto || 'img/default.png'}" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:3px solid #4CAF50; margin-bottom:15px;">
+                    <img src="${m.foto || 'img/default.png'}" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:3px solid var(--verde-vivo); margin-bottom:15px;">
                     <h3 style="margin:5px 0;">${m.nombre}</h3>
                     <p style="color:gray; font-size:.9rem; margin-bottom:15px;">${m.raza}</p>
-                    <div style="display:flex; gap:10px; justify-content:center;">
-                        <button class="btn-secundario" onclick="verHistorial(${m.id_mascota})">Historial</button>
-                        <button class="btn-principal" onclick="agendarCita(${m.id_mascota})" style="background:#FF9800; border:none; color:white; padding:5px 10px; border-radius:5px; cursor:pointer;">Cita</button>
-                    </div>
+                    
+                    <button class="btn-secundario" onclick="verHistorial(${m.id_mascota})" style="width:100%; padding:10px;">
+                        <i class="fas fa-file-medical"></i> Ver Historial
+                    </button>
                 </div>`;
-        });
-    });
+            });
+        }
+    })
+    .catch(err => console.error("Error al obtener mascotas:", err));
+
+    // 2. CARGAR VETERINARIOS (Para el nuevo select del modal)
+    fetch("php/get_veterinarios.php")
+    .then(res => res.json())
+    .then(vets => {
+        const selectVet = document.getElementById('select-veterinarios');
+        if (selectVet) {
+            selectVet.innerHTML = '<option value="" disabled selected>Selecciona un especialista</option>';
+            vets.forEach(v => {
+                // Usamos v.nombre y v.apellido que ahora vienen del JOIN
+                selectVet.innerHTML += `<option value="${v.carnetVet}">Dr(a). ${v.nombre} ${v.apellido}</option>`;
+            });
+        }
+    })
+    .catch(err => console.error("Error al cargar veterinarios:", err));
 }
