@@ -21,8 +21,7 @@
 
     <nav class="side-nav">
       <a href="#" class="active"><i class="fas fa-paw"></i> Mis Mascotas</a>
-      <a href="#agendar-cita"><i class="fas fa-calendar-plus"></i> Agendar Cita</a>
-      <a href="#historial-global"><i class="fas fa-file-medical"></i> Historial Médico</a>
+      <a href="javascript:void(0)" onclick="abrirModal()"><i class="fas fa-calendar-plus"></i> Agendar Cita</a>      <a href="#historial-global"><i class="fas fa-file-medical"></i> Historial Médico</a>
       <a href="php/logout.php" class="logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
     </nav>
   </aside>
@@ -57,11 +56,12 @@
         </div>
       </div>
 
+      
+
       <!-- ACCESO RÁPIDO -->
       <div class="card">
         <h3><i class="fas fa-star" style="color:var(--coral)"></i> Acciones Rápidas</h3>
-        <button class="btn-principal" style="width:100%; margin-bottom:10px;" onclick="location.href='#agendar-cita'">
-            <i class="fas fa-calendar-alt"></i> Agendar Nueva Cita
+        <button class="btn-principal" style="width:100%; margin-bottom:10px;" onclick="abrirModal()">            <i class="fas fa-calendar-alt"></i> Agendar Nueva Cita
         </button>
         <button class="btn-secundario" style="width:100%;">
             <i class="fas fa-envelope"></i> Contactar Veterinario
@@ -70,14 +70,44 @@
     </div>
   </main>
 </div>
+<!-- MODAL PARA AGENDAR CITA -->
+<div id="modal-cita" class="modal-overlay hidden">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3><i class="fas fa-calendar-plus"></i> Agendar Nueva Cita</h3>
+            <button onclick="cerrarModal()" class="btn-cerrar">&times;</button>
+        </div>
+        <form id="form-agendar-cita" class="input-group">
+            <label>Selecciona tu mascota:</label>
+            <select id="select-mascotas" name="id_mascota" required>
+                <!-- Se llena dinámicamente desde cliente.js -->
+            </select>
 
+            <label>Fecha:</label>
+            <input type="date" name="fecha" id="input-fecha" required>
+
+            <label>Hora:</label>
+            <input type="time" name="hora" id="input-hora" required>
+
+            <label>Motivo de la cita:</label>
+            <textarea name="motivo" placeholder="Ej: Control de rutina o audición del coro..."></textarea>
+
+            <button type="submit" class="btn-principal" style="margin-top:15px;">Confirmar Cita</button>
+        </form>
+    </div>
+</div>
 <script src="js/cliente.js"></script>
 <script>
-    // Lógica del menú móvil (la misma que tenías)
-    /*const toggleBtn = document.getElementById('menu-toggle');
-    const sidebar = document.getElementById('sidebar');
-    toggleBtn.addEventListener('click', () => sidebar.classList.toggle('active'));
-    */
+
+
+// Lógica para abrir y cerrar el modal
+    /*function abrirModal() {
+        document.getElementById('modal-cita').classList.remove('hidden');
+    }
+
+    function cerrarModal() {
+        document.getElementById('modal-cita').classList.add('hidden');
+    } */   
     document.getElementById('fecha-hoy').textContent = new Date().toLocaleDateString('es-BO', {
       weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
     });
