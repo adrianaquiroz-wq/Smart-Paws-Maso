@@ -207,10 +207,29 @@ CREATE TABLE `personas` (
 
 CREATE TABLE `productos` (
   `id_producto` int(11) NOT NULL,
-  `nombre` varchar(40) DEFAULT NULL,
-  `descripcion` varchar(80) DEFAULT NULL,
-  `precio` decimal(10,2) DEFAULT NULL
+  `nombre`      varchar(40)   DEFAULT NULL,
+  `descripcion` varchar(80)   DEFAULT NULL,
+  `precio`      decimal(10,2) DEFAULT NULL,
+  `stock`       int(11)       DEFAULT 0,
+  `imagen`      varchar(255)  DEFAULT NULL,
+  `categoria`   varchar(40)   DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`nombre`, `descripcion`, `precio`, `stock`, `imagen`, `categoria`) VALUES
+('Pro Plan Adulto 3kg',        'Alimento balanceado premium para perros adultos',     185.00, 12, 'https://d34xtejqjqcp3x.cloudfront.net/store/d3ed875c04ea93a088da60d182535b9f.webp', 'Alimento'),
+('Royal Canin Gato 1.5kg',     'Nutrición específica para gatos domésticos',          135.00,  8, 'https://d34xtejqjqcp3x.cloudfront.net/store/f890525b942c7e3f9734f4126749fac6.webp', 'Alimento'),
+('Shampoo Neutro 500ml',       'Shampoo suave sin parabenos para todo tipo de pelo',   35.00, 20, 'https://d34xtejqjqcp3x.cloudfront.net/store/a963e1560fdc2390924170fd0c7d0bed.webp', 'Higiene'),
+('Cepillo Desmallador',        'Reduce enredos y caída de pelo eficientemente',        28.00, 15, 'https://m.media-amazon.com/images/S/aplus-media-library-service-media/4eb844b5-caae-46e4-8811-09d5e8da4419.__AC_SR166,182___.jpg', 'Higiene'),
+('Cuerda Trenzada Resistente', 'Juguete dental de cuerda para perros medianos',        22.00, 30, 'https://m.media-amazon.com/images/I/81V3yf82dcL._AC_UF400,400_QL80_.jpg',            'Juguetes'),
+('Pelota Interactiva',         'Pelota con sonido para gatos y perros pequeños',       18.00, 25, 'https://media.falabella.com/falabellaPE/138428445_01/w=1500,h=1500,fit=cover',         'Juguetes'),
+('Plato Acero Inoxidable',     'Antideslizante, apto para lavavajillas',               30.00, 10, 'https://petkorp.com/wp-content/uploads/2023/02/AP-D003-043_2.webp',                   'Accesorios'),
+('Correa Retráctil 5m',        'Con freno de bloqueo y mango ergonómico',              65.00,  6, 'https://media.adeo.com/mkp/62680a51ac8de070d5a053670aee18e4/media.jpeg',               'Accesorios'),
+('Cama Acolchada Talla L',     'Relleno de fibra suave, funda lavable',               120.00,  4, 'https://tottoco.vtexassets.com/arquivos/ids/514234/PDCBCA1009.jpg',                    'Camas'),
+('Cama Cáscara de Nuez M',    'Diseño nórdico, antideslizante, súper suave',          95.00,  0, 'https://acdn-us.mitiendanube.com/stores/880/994/products/cama-nordico-pet-max-bbb870bbbc9c95738f17214116333463-1024-1024.webp', 'Camas');
 
 -- --------------------------------------------------------
 
