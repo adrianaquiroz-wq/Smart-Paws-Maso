@@ -10,7 +10,8 @@ header('Content-Type: application/json');
 $sql = "SELECT c.id_cita, c.fecha, c.hora, m.nombre as mascota, c.motivo 
         FROM citas c
         JOIN mascotas m ON c.id_mascota = m.id_mascota
-        WHERE LOWER(c.estado) = 'pendiente'"; // Solo mostrar las que no se han atendido
+        WHERE LOWER(c.estado) = 'pendiente'
+        ORDER BY c.fecha ASC, c.hora ASC"; // Solo mostrar las que no se han atendido
 
 $resultado = mysqli_query($conexion, $sql);
 $eventos = [];

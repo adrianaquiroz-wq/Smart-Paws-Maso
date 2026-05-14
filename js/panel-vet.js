@@ -1,3 +1,4 @@
+/*panel_vet.js */
 /* --- CARGAR LISTA DE MASCOTAS RECIENTES --- */
 function cargarMascotasRecientes() {
     // Esta función llena la sección de "Mascotas registradas recientemente"
@@ -80,6 +81,8 @@ function nuevaAtencion(id){
 document.addEventListener('DOMContentLoaded', function() {
     // 1. Cargamos las mascotas primero
     cargarMascotasRecientes();
+    cargarStatsDashboard();
+    cargarProximasCitasLista();
 
     // 2. Configuramos el calendario
     var calendarEl = document.getElementById('calendario');
@@ -126,50 +129,69 @@ function cargarStatsDashboard() {
     fetch('php/get_dashboard_stats.php')
         .then(res => res.json())
         .then(data => {
-            // Actualizar los cuadros de Stats
+            // Actualizar números
             document.getElementById('stat-mascotas-hoy').textContent = data.mascotas_hoy;
             document.getElementById('stat-citas-pendientes').textContent = data.citas_pendientes;
             document.getElementById('stat-total-clientes').textContent = data.total_clientes;
             document.getElementById('stat-vacunas-pendientes').textContent = data.vacunas_pendientes;
             
-            // Actualizar el pequeño label de "Próxima: 10:00 AM"
-            const labelProxima = document.querySelector('.stat-card.ambar .stat-change');
+            // Actualizar la hora de la próxima cita
+            const labelProxima = document.getElementById('label-proxima-cita');
             if(labelProxima) labelProxima.textContent = `Próxima: ${data.proxima_cita}`;
         })
         .catch(err => console.error("Error cargando stats:", err));
 }
-
-// Llamar a la función cuando cargue el documento
-document.addEventListener('DOMContentLoaded', () => {
-    cargarStatsDashboard();
-    // ... tus otras funciones (calendario, etc.)
-});
-
 
 function cargarProximasCitasLista() {
     fetch('php/get_citas_vet.php')
         .then(res => res.json())
         .then(eventos => {
             const cont = document.getElementById('contenedor-proximas-citas');
+            if (!cont) return;
+            
             if (eventos.length === 0) {
-                cont.innerHTML = "<p style='padding:15px; color:gray;'>No hay citas en los próximos 4 días.</p>";
+                cont.innerHTML = "<p style='padding:15px; color:gray;'>No hay citas pendientes.</p>";
                 return;
             }
 
-            cont.innerHTML = ""; 
+            cont.innerHTML = "";
+            const hoyObj = new Date();
+            hoyObj.setHours(0, 0, 0, 0);
+
             eventos.forEach(cita => {
+                const fechaCita = new Date(cita.start);
+                const soloFechaCita = new Date(cita.start);
+                soloFechaCita.setHours(0, 0, 0, 0);
+
+                let etiquetaFecha = "";
+                const difTiempo = soloFechaCita.getTime() - hoyObj.getTime();
+                const difDias = Math.round(difTiempo / (1000 * 3600 * 24));
+
+                if (difDias === 0) etiquetaFecha = "HOY";
+                else if (difDias === 1) etiquetaFecha = "Mañana";
+                else etiquetaFecha = `${fechaCita.getDate()}/${fechaCita.getMonth() + 1}`;
+
                 const hora = cita.start.split('T')[1].substring(0, 5);
-                const fecha = cita.fecha_formateada; // Usamos el nuevo campo
 
                 cont.innerHTML += `
-                    <div class="mascota-item">
+                    <div class="mascota-item" style="border-left: 4px solid ${difDias === 0 ? '#2ecc71' : '#ddd'}; margin-bottom: 8px; padding: 10px; background: #f9f9f9; border-radius: 4px;">
                         <div>
-                            <span style="color:var(--verde-vivo); font-weight:700; font-size:0.75rem;">[${fecha}]</span>
+                            <span style="font-size: 0.7rem; font-weight: 800; color: ${difDias === 0 ? '#2ecc71' : 'gray'};">
+                                [${etiquetaFecha.toUpperCase()}]
+                            </span>
                             <span style="font-weight:700;">${hora}</span> — ${cita.title}
-                            <span class="status-badge pendiente" style="margin-left:8px;">Consulta</span>
                         </div>
-                        <span style="font-size:.8rem;color:var(--texto-suave);">${cita.description}</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px;">
+                            <span style="font-size:.8rem; color:#666;">${cita.description || 'Sin motivo'}</span>
+                            <span class="status-badge ${difDias === 0 ? 'hoy' : 'pendiente'}" style="font-size: 0.65rem; background: ${difDias === 0 ? '#e8f5e9' : '#fff3e0'}; color: ${difDias === 0 ? '#2e7d32' : '#ef6c00'}; padding: 2px 6px; border-radius: 4px;">
+                                ${difDias === 0 ? 'Urgente' : 'Programada'}
+                            </span>
+                        </div>
                     </div>`;
             });
+        })
+        .catch(err => {
+            console.error("Error cargando lista de citas:", err);
+            document.getElementById('contenedor-proximas-citas').innerHTML = "Error al conectar con el servidor.";
         });
 }
