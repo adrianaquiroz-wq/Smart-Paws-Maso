@@ -1,73 +1,80 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Menú Hamburguesa
-    const menuToggle = document.getElementById('mobile-menu');
-    const navMenu = document.querySelector('.nav-menu');
-    if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+
+  const menuToggle = document.getElementById('mobile-menu');
+  const navMenu = document.querySelector('.nav-menu');
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+  }
+
+  const contenedor = document.getElementById('contenedor-productos');
+  if (!contenedor) return;
+
+  const IMG_DEFAULT = 'img/producto1.webp';
+
+  const PRODUCTOS_LOCAL = [
+    { nombre:'Pro Plan Adulto 3kg',       precio:185, imagen:'https://i.imgur.com/5e2a262.png' },
+    { nombre:'Royal Canin Gato 1.5kg',    precio:135, imagen:'https://i.imgur.com/4f2XKPt.png' },
+    { nombre:'Shampoo Neutro 500ml',      precio:35,  imagen:'https://i.imgur.com/nlyxC5d.png' },
+    { nombre:'Cepillo Desmallador',       precio:28,  imagen:'' },
+    { nombre:'Cuerda Trenzada Resistente',precio:22,  imagen:'' },
+    { nombre:'Pelota Interactiva',        precio:18,  imagen:'' },
+    { nombre:'Plato Acero Inoxidable',    precio:30,  imagen:'' },
+    { nombre:'Correa Retráctil 5m',       precio:65,  imagen:'' },
+    { nombre:'Cama Acolchada Talla L',    precio:120, imagen:'' },
+    { nombre:'Cama Cáscara de Nuez M',   precio:95,  imagen:'' },
+  ];
+
+  let todosLosProductos = [];
+
+  async function cargarProductos() {
+    try {
+      const res = await fetch('php/get_productos.php');
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      return data.length ? data : PRODUCTOS_LOCAL;
+    } catch {
+      return PRODUCTOS_LOCAL;
     }
+  }
 
-    const contenedor = document.getElementById('contenedor-productos');
-    const inputBusqueda = document.getElementById('input-busqueda');
-    const btnBuscar = document.getElementById('btn-buscar');
+  function renderProductos(lista) {
+    contenedor.innerHTML = '';
+    lista.forEach(p => {
+      const img = p.imagen || IMG_DEFAULT;
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${img}" alt="${p.nombre}" onerror="this.src='${IMG_DEFAULT}'">
+        <div class="card-info">
+          <h3>${p.nombre}</h3>
+          <p class="price">Bs. ${Number(p.precio).toFixed(2)}</p>
+          <a href="login.html" style="
+            display:block; margin-top:10px; text-align:center;
+            background:var(--verde-vivo); color:#fff; padding:8px;
+            border-radius:999px; font-size:.8rem; text-decoration:none;
+            font-weight:700;">
+            <i class="fas fa-sign-in-alt"></i> Inicia sesión para comprar
+          </a>
+        </div>`;
+      contenedor.appendChild(card);
+    });
+  }
 
-    // 2. NUESTRO ESTANTE LOCAL (Plan de Respaldo)
-    const productosLocales = [
-        { title: "Alimento Pro Plan Adulto 3kg", price: 185, thumbnail: "https://storage.googleapis.com/eddress/market-products/merchants/7wg0D5ChQU-pXxzCDmVhkA/5e2a2624350e5401d9b37537.png?v=13" },
-        { title: "Cama acolchada para Perro L", price: 120, thumbnail: "https://tottoco.vtexassets.com/arquivos/ids/514234/PDCBCA1009-222-G98L_2.jpg?v=638860197170830000" },
-        { title: "Shampoo para Mascotas 500ml", price: 35, thumbnail: "https://storage.googleapis.com/eddress/market-products/merchants/7wg0D5ChQU-pXxzCDmVhkA/nlyxC5dE.png?v=1" },
-        { title: "Juguete Cuerda Resistente", price: 25, thumbnail: "https://m.media-amazon.com/images/I/81V3yf82dcL._AC_UF1000,1000_QL80_.jpg" },
-        { title: "Plato de acero inoxidable", price: 30, thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw27gL6xLSUqSPKy6UFP6npHy66T2vgYOf-w&s" }
-    ];
+  function filtrar() {
+    const q = document.getElementById('input-busqueda')?.value.trim().toLowerCase() || '';
+    renderProductos(q ? todosLosProductos.filter(p => p.nombre.toLowerCase().includes(q)) : todosLosProductos);
+  }
 
-    // 3. Función de búsqueda local (¡No falla nunca!)
-    function buscarProductosLocal(query) {
-        contenedor.innerHTML = ''; 
-        
-        // Filtramos la lista según lo que escribas
-        const resultados = productosLocales.filter(p => 
-            p.title.toLowerCase().includes(query.toLowerCase())
-        );
+  cargarProductos().then(data => {
+    todosLosProductos = data;
+    renderProductos(data);
+  });
 
-        if (resultados.length > 0) {
-            mostrarProductos(resultados);
-        } else {
-            contenedor.innerHTML = `<p>No encontramos "${query}" en nuestro inventario local.</p>`;
-        }
-    }
+  document.getElementById('btn-buscar')?.addEventListener('click', filtrar);
+  document.getElementById('input-busqueda')?.addEventListener('keypress', e => { if (e.key === 'Enter') filtrar(); });
+  document.getElementById('input-busqueda')?.addEventListener('input', () => {
+    clearTimeout(window._db);
+    window._db = setTimeout(filtrar, 300);
+  });
 
-    function mostrarProductos(productos) {
-        contenedor.innerHTML = '';
-        productos.forEach(prod => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <img src="${prod.thumbnail}" alt="${prod.title}">
-                <div class="card-info">
-                    <h3>${prod.title}</h3>
-                    <p class="price">Bs. ${prod.price}</p>
-                </div>
-            `;
-            contenedor.appendChild(card);
-        });
-    }
-
-    // 4. Eventos
-    if (btnBuscar) {
-        btnBuscar.addEventListener('click', () => {
-            const query = inputBusqueda.value.trim();
-            if (query) buscarProductosLocal(query);
-        });
-
-        inputBusqueda.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const query = inputBusqueda.value.trim();
-                if (query) buscarProductosLocal(query);
-            }
-        });
-    }
-
-    // Carga inicial
-    buscarProductosLocal('a'); // Muestra todo lo que tenga una "a"
 });
