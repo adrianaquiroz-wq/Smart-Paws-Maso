@@ -115,15 +115,14 @@
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-      <!-- PRÓXIMAS CITAS DEL DUEÑO -->
-      <div class="card">
-        <h3><i class="fas fa-clock" style="color:var(--ambar)"></i> Mis Citas Programadas</h3>
-        <div id="citas-dueno">
-          <p style="font-size: .9rem; color: gray;">No tienes citas próximas.</p>
-        </div>
-      </div>
-
+    <!-- PRÓXIMAS CITAS DEL DUEÑO -->
+<div class="card">
+  <h3><i class="fas fa-clock" style="color:var(--ambar)"></i> Mis Citas Programadas</h3>
+  <!-- El JS buscará este ID para reemplazar el "Cargando..." por las citas reales -->
+  <div id="citas-dueno" class="lista-citas">
+    <p style="font-size: .9rem; color: gray;">Cargando tus próximas citas...</p>
+  </div>
+</div>
       
 
       <!-- ACCESO RÁPIDO -->
@@ -146,10 +145,6 @@
             <h3><i class="fas fa-calendar-plus"></i> Agendar Nueva Cita</h3>
             <button onclick="cerrarModal()" class="btn-cerrar">&times;</button>
         </div>
-
-
-
-
 
         <form id="form-agendar-cita" class="input-group">
             <label>Selecciona tu mascota:</label>

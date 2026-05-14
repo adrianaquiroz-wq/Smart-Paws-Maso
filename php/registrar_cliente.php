@@ -6,23 +6,30 @@ $carnet = $_POST['carnetDue'];
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $usuario = $_POST['usuario'];
-$fecha = $_POST['fecha_nacimiento']; // opcional si no está en PERSONAS
 $direccion = $_POST['direccion'];
 
-// 🔐 contraseña automática
+// VALIDAR SI YA EXISTE
+$verificar = "SELECT * FROM PERSONAS WHERE carnet='$carnet'";
+$res = $conexion->query($verificar);
+
+if($res->num_rows > 0){
+    die("Este cliente ya está registrado");
+}
+
+// CONTRASEÑA
 $pass = substr(md5($usuario . time()), 0, 8);
 
-// 1️⃣ PERSONA
-$sql1 = "INSERT INTO PERSONAS 
+// INSERT PERSONA
+$sql1 = "INSERT INTO PERSONAS
 (carnet, nombre, apellido, usuario, contrasena, direccion)
-VALUES 
+VALUES
 ('$carnet', '$nombre', '$apellido', '$usuario', '$pass', '$direccion')";
 
 if(!$conexion->query($sql1)){
     die("Error en PERSONAS: " . $conexion->error);
 }
 
-// 2️⃣ CLIENTE
+// INSERT CLIENTE
 $sql2 = "INSERT INTO CLIENTES (carnetDue)
 VALUES ('$carnet')";
 

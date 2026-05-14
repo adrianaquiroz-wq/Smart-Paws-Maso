@@ -1,3 +1,4 @@
+//atenciones.js
 // Simulación de búsqueda (lógica de tu DB)
 function buscarPacientes() {
     const ci = document.getElementById('busca-ci').value;
@@ -22,50 +23,26 @@ function seleccionarMascota(id, nombre) {
     document.getElementById('atencion-id-mascota').value = id;
 }
 
-// Registro de atención
-document.getElementById('form-atencion').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const datosAtencion = {
-        id_mascota: document.getElementById('atencion-id-mascota').value,
-        descripcion: document.getElementById('desc-atencion').value,
-        fecha: new Date().toISOString().split('T')[0],
-        prox_fecha: document.getElementById('prox-fecha').value,
-        traido_por: document.getElementById('nombre-trajo').value
-    };
-
-    console.log("Guardando en tabla ATENCIONES:", datosAtencion);
-    alert("Atención registrada con éxito en el historial de " + document.getElementById('nombre-paciente-actual').innerText);
-    e.target.reset();
-});
-
-
-/*-----------------------------------------------------------------*/
-/*---------------------------REGISTRAR CLIENTE---------------------------*/
-document.getElementById("form-cliente")?.addEventListener("submit", e => {
-    e.preventDefault();
-
-    const carnet = document.getElementById("cli-carnet").value;
-    const nombre = document.getElementById("cli-nombre").value;
-    const apellido = document.getElementById("cli-apellido").value;
-    const usuario = document.getElementById("cli-usuario").value;
-    const pass = document.getElementById("cli-pass").value;
-
-    fetch("php/registrar_cliente.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: `carnet=${carnet}&nombre=${nombre}&apellido=${apellido}&usuario=${usuario}&pass=${pass}`
-    })
-    .then(res => res.text())
-    .then(data => {
-        if (data === "ok") {
-            alert("Cliente registrado");
-        } else {
-            alert("Error");
-        }
+const formAtencion = document.getElementById('form-atencion');
+if (formAtencion) {
+    formAtencion.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert("Atención registrada con éxito");
+        e.target.reset();
     });
-});
+}
+
+/* --- REGISTRO DE CLIENTE (Restaurado) --- */
+const formCliente = document.getElementById("form-cliente");
+if (formCliente) {
+    formCliente.addEventListener("submit", e => {
+        e.preventDefault();
+        const formData = new FormData(formCliente);
+        fetch("php/registrar_cliente.php", { method: "POST", body: formData })
+        .then(res => res.text())
+        .then(data => { if(data.trim()==="ok") alert("Cliente registrado"); });
+    });
+}
 /*-----------------------------------------------------------------*/
 /*-----------------------FIN REGISTRAR CLIENTE---------------------------*/
 

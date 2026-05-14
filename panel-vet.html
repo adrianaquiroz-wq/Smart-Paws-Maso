@@ -1,3 +1,4 @@
+<!--panel-vet.html-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,6 +8,24 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <!-- Añadir en el head de panel-vet.html -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+<style>
+  #calendario {
+    max-width: 100%;
+    margin: 20px auto;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Ajuste para que las celdas no sean muy altas */
+.fc .fc-view-harness {
+    height: 500px !important;
+}
+</style>
+
 </head>
 
 <body>
@@ -185,39 +204,6 @@
 
         <div class="mascota-item">
           <div>
-            <span style="font-weight:700;">10:00 AM</span> — Max
-            <span class="status-badge pendiente" style="margin-left:8px;">Vacuna</span>
-          </div>
-
-          <span style="font-size:.8rem;color:var(--texto-suave);">
-            Pastor Alemán
-          </span>
-        </div>
-
-        <div class="mascota-item">
-          <div>
-            <span style="font-weight:700;">11:30 AM</span> — Luna
-            <span class="status-badge completado" style="margin-left:8px;">Control</span>
-          </div>
-
-          <span style="font-size:.8rem;color:var(--texto-suave);">
-            Gato persa
-          </span>
-        </div>
-
-        <div class="mascota-item">
-          <div>
-            <span style="font-weight:700;">2:00 PM</span> — Toby
-            <span class="status-badge urgente" style="margin-left:8px;">Urgente</span>
-          </div>
-
-          <span style="font-size:.8rem;color:var(--texto-suave);">
-            Golden Retriever
-          </span>
-        </div>
-
-        <div class="mascota-item">
-          <div>
             <span style="font-weight:700;">3:30 PM</span> — Coco
             <span class="status-badge pendiente" style="margin-left:8px;">Consulta</span>
           </div>
@@ -238,11 +224,6 @@
         </h3>
 
         <div class="mascota-item">
-          <span>⚠️ Max tiene vacuna antirrábica vencida</span>
-          <span class="status-badge urgente">Urgente</span>
-        </div>
-
-        <div class="mascota-item">
           <span>📅 5 citas agendadas para hoy</span>
           <span class="status-badge pendiente">Hoy</span>
         </div>
@@ -250,11 +231,6 @@
         <div class="mascota-item">
           <span>💊 Stock de amoxicilina bajo</span>
           <span class="status-badge pendiente">Inventario</span>
-        </div>
-
-        <div class="mascota-item">
-          <span>✅ Luna — historial actualizado</span>
-          <span class="status-badge completado">Listo</span>
         </div>
 
       </div>

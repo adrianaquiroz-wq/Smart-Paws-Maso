@@ -1,46 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-    
-    // --- 1. ESCUDO PARA EL FORMULARIO (Solo si existe) ---
-    const formCliente = document.getElementById("form-cliente");
-    if (formCliente) {
-        formCliente.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const datos = new FormData(formCliente);
-            try {
-                const res = await fetch("php/registrar_cliente.php", {
-                    method: "POST",
-                    body: datos
-                });
-                const texto = await res.text();
-                document.getElementById("modal-info").innerHTML = texto;
-                document.getElementById("modal-exito").classList.remove("hidden");
-            } catch (err) {
-                console.error("Error al registrar:", err);
-            }
-        });
-    }
-
-    // --- 2. CARGAR DATOS DEL DUEÑO ---
-    if (document.getElementById("saludo-dueno")) {
-        cargarPerfil();
-    }
-    
-    if (document.getElementById("lista-mis-mascotas")) {
-        cargarMisMascotas();
-    }
-
-    // --- 3. MENÚ LATERAL ---
-    const toggleBtn = document.getElementById('menu-toggle');
-    const sidebar = document.getElementById('sidebar');
-    if (toggleBtn && sidebar) {
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-        });
-    }
-
-        
-});
-
 // --- FUNCIONES ---
 
 function cargarPerfil() {
@@ -54,6 +11,7 @@ function cargarPerfil() {
     })
     .catch(err => console.log("No se pudo cargar el perfil"));
 }
+
 function cargarMisMascotas() {
     fetch("php/get_mis_mascotas.php")
     .then(res => res.json())
@@ -86,9 +44,8 @@ function cargarMisMascotas() {
 
 
 
-function verHistorial(id) { window.location.href = `historial-cliente.html?id=${id}`; }
 // --- FUNCIONES GLOBALES (Fuera del DOMContentLoaded para que el HTML las vea) ---
-/* --- FUNCIONES GLOBALES --- */
+/* --- FUNCIONES GLOBALES          CCCCIIIITTTTAAAASSSS       --- */
 
 function agendarCita(id = '') { 
     const modal = document.getElementById('modal-cita');
@@ -107,11 +64,6 @@ function agendarCita(id = '') {
             }
         }
     }
-}
-
-function cerrarModal() {
-    const modalCita = document.getElementById('modal-cita');
-    if (modalCita) modalCita.classList.add('hidden');
 }
 
 function verHistorial(id) { 
@@ -140,6 +92,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Llamamos a esta función que ahora hará ambas tareas
     cargarMisMascotasYSelect();
 
+
+    if (document.getElementById("citas-dueno")) {
+        cargarCitasPendientes();
+    }
+
     // 3. Manejo del Formulario de Citas (Se mantiene igual)
     const formCita = document.getElementById('form-agendar-cita');
     if (formCita) {
@@ -164,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 // NUEVA VERSIÓN DE TU FUNCIÓN PARA LLENAR EL SELECT
-// NUEVA VERSIÓN OFICIAL DE TU FUNCIÓN
+
 function cargarMisMascotasYSelect() {
     
     // 1. CARGAR MASCOTAS (Para el Select y las Tarjetas)
@@ -182,7 +139,6 @@ function cargarMisMascotasYSelect() {
             });
         }
 
-        // Llenamos las tarjetas (Solo con botón de Historial)
         if (contenedor) {
             contenedor.innerHTML = "";
             data.forEach(m => {
@@ -214,5 +170,37 @@ function cargarMisMascotasYSelect() {
             });
         }
     })
+    
     .catch(err => console.error("Error al cargar veterinarios:", err));
+}
+
+
+function cargarCitasPendientes() {
+    fetch("php/get_mis_citas.php")
+    .then(res => res.json())
+    .then(data => {
+        const contenedor = document.getElementById("citas-dueno");
+        if (!contenedor) return;
+
+        if (data.length === 0) {
+            contenedor.innerHTML = `<p style="font-size: .9rem; color: gray;">No tienes citas próximas.</p>`;
+            return;
+        }
+
+        contenedor.innerHTML = ""; 
+        data.forEach(c => {
+            contenedor.innerHTML += `
+            <div class="cita-item" style="display:flex; align-items:center; gap:15px; padding:10px; border-bottom:1px solid #eee;">
+                <div style="background:var(--verde-vivo); color:white; padding:8px; border-radius:10px; text-align:center; min-width:60px;">
+                    <span style="display:block; font-size:1.1rem; font-weight:bold;">${c.dia}</span>
+                    <span style="font-size:0.7rem; text-transform:uppercase;">${c.mes}</span>
+                </div>
+                <div style="flex:1;">
+                    <h4 style="margin:0; font-size:0.95rem;">${c.mascota} — <span style="color:var(--verde-vivo)">${c.hora}</span></h4>
+                    <p style="margin:2px 0 0; font-size:0.8rem; color:gray;">Dr(a). ${c.vet_nombre} | ${c.motivo}</p>
+                </div>
+                <span class="tag-estado" style="font-size:0.7rem; padding:4px 8px; border-radius:12px; background:#fff3cd; color:#856404;">${c.estado}</span>
+            </div>`;
+        });
+    });
 }
