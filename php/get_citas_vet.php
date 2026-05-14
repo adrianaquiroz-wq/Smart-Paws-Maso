@@ -1,5 +1,6 @@
-//get_citas_vet.php
+
 <?php
+//get_citas_vet.php
 include 'conexion.php'; // Asegúrate de que el nombre sea correcto
 // Esto convierte tu PHP en una "API" que el calendario puede leer
 header('Content-Type: application/json');
@@ -17,8 +18,9 @@ $eventos = [];
 while($fila = mysqli_fetch_assoc($resultado)) {
     $eventos[] = [
         'id'    => $fila['id_cita'],
-        'title' => $fila['mascota'] . " (" . $fila['motivo'] . ")",
+        'title' => $fila['mascota'],
         'start' => $fila['fecha'] . "T" . $fila['hora'], // Formato ISO para FullCalendar
+        'description' => $fila['motivo'], // Guardamos el detalle aquí
         'color' => '#2ecc71' // Color verde para las citas
     ];
 }

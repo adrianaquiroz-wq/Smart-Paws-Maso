@@ -93,6 +93,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,listWeek'
             },
+            displayEventTime: true, // Para que salga "10:25" antes del nombre
+    
+    // Personalización de cómo se ve el evento en la lista
+    eventDidMount: function(info) {
+        if (info.view.type === 'listWeek') {
+            // Añade el motivo al lado del nombre solo en la vista de lista
+            let titleEl = info.el.querySelector('.fc-list-event-title');
+            if (titleEl && info.event.extendedProps.description) {
+                titleEl.innerHTML += ` <small style="color:gray;">(${info.event.extendedProps.description})</small>`;
+            }
+        }
+    },
             
             // CONEXIÓN A TU API DE CITAS (MySQL)
             events: 'php/get_citas_vet.php', 
