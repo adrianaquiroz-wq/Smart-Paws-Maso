@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-05-2026 a las 21:59:30
+-- Tiempo de generación: 14-05-2026 a las 05:32:29
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -31,9 +31,16 @@ CREATE TABLE `atenciones` (
   `id_atencion` int(11) NOT NULL,
   `id_cita` int(11) DEFAULT NULL,
   `fecha` date NOT NULL,
-  `descripcion` varchar(80) DEFAULT NULL,
+  `diagnostico` text DEFAULT NULL,
   `prox_fecha` date DEFAULT NULL,
-  `carnetVet` int(11) DEFAULT NULL
+  `carnetVet` int(11) DEFAULT NULL,
+  `asistente_nombre` varchar(100) DEFAULT NULL,
+  `asistente_relacion` varchar(50) DEFAULT NULL,
+  `peso_kg` decimal(5,2) DEFAULT NULL,
+  `temperatura` decimal(4,1) DEFAULT NULL,
+  `frecuencia_cardiaca` int(11) DEFAULT NULL,
+  `tratamiento` text DEFAULT NULL,
+  `observaciones` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -53,7 +60,10 @@ CREATE TABLE `citas` (
   `carnetVet` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+--
+-- Volcado de datos para la tabla `citas`
+--
+
 
 --
 -- Estructura de tabla para la tabla `clientes`
@@ -66,7 +76,7 @@ CREATE TABLE `clientes` (
 --
 -- Volcado de datos para la tabla `clientes`
 --
- --------------------------------------------------------
+--------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `clientes_mascotas`
@@ -81,6 +91,7 @@ CREATE TABLE `clientes_mascotas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `clientes_mascotas`
 
 --
 -- Estructura de tabla para la tabla `colores`
@@ -168,7 +179,12 @@ CREATE TABLE `mascotas` (
   `estado` varchar(20) DEFAULT 'activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--
+--
+-- Volcado de datos para la tabla `mascotas`
+--
+
+-- Estructura de tabla para la tabla `personas`
+--
 
 CREATE TABLE `personas` (
   `carnet` int(11) NOT NULL,
@@ -180,7 +196,10 @@ CREATE TABLE `personas` (
   `contrasena` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---------------------------------------------------------
+--
+-- Volcado de datos para la tabla `personas`
+--
+-----------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `productos`
@@ -237,11 +256,7 @@ CREATE TABLE `veterinarios` (
   `especialidad` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `veterinarios`
---
-
--- Índices para tablas volcadas
+--dices para tablas volcadas
 --
 
 --
@@ -344,13 +359,13 @@ ALTER TABLE `atenciones`
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes_mascotas`
 --
 ALTER TABLE `clientes_mascotas`
-  MODIFY `id_registroMasc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_registroMasc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `colores`
@@ -374,7 +389,7 @@ ALTER TABLE `especies`
 -- AUTO_INCREMENT de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
