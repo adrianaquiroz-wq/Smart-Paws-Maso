@@ -1,31 +1,9 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 14-05-2026 a las 05:32:29
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `veterinaria`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `atenciones`
---
 
 CREATE TABLE `atenciones` (
   `id_atencion` int(11) NOT NULL,
@@ -60,10 +38,6 @@ CREATE TABLE `citas` (
   `carnetVet` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `citas`
---
-
 
 --
 -- Estructura de tabla para la tabla `clientes`
@@ -75,10 +49,7 @@ CREATE TABLE `clientes` (
 
 --
 -- Volcado de datos para la tabla `clientes`
---
---------------------------------------------------------
-
---
+-
 -- Estructura de tabla para la tabla `clientes_mascotas`
 --
 
@@ -91,7 +62,6 @@ CREATE TABLE `clientes_mascotas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `clientes_mascotas`
 
 --
 -- Estructura de tabla para la tabla `colores`
@@ -137,7 +107,10 @@ CREATE TABLE `compras` (
   `carnetDue` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+--
+-- Volcado de datos para la tabla `compras`
+--
+ --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `especies`
@@ -183,6 +156,7 @@ CREATE TABLE `mascotas` (
 -- Volcado de datos para la tabla `mascotas`
 --
 
+--
 -- Estructura de tabla para la tabla `personas`
 --
 
@@ -199,7 +173,7 @@ CREATE TABLE `personas` (
 --
 -- Volcado de datos para la tabla `personas`
 --
------------------------------------------------------
+--------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `productos`
@@ -207,29 +181,29 @@ CREATE TABLE `personas` (
 
 CREATE TABLE `productos` (
   `id_producto` int(11) NOT NULL,
-  `nombre`      varchar(40)   DEFAULT NULL,
-  `descripcion` varchar(80)   DEFAULT NULL,
-  `precio`      decimal(10,2) DEFAULT NULL,
-  `stock`       int(11)       DEFAULT 0,
-  `imagen`      varchar(255)  DEFAULT NULL,
-  `categoria`   varchar(40)   DEFAULT NULL
+  `nombre` varchar(40) DEFAULT NULL,
+  `descripcion` varchar(80) DEFAULT NULL,
+  `precio` decimal(10,2) DEFAULT NULL,
+  `stock` int(11) DEFAULT 0,
+  `imagen` varchar(255) DEFAULT NULL,
+  `categoria` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`nombre`, `descripcion`, `precio`, `stock`, `imagen`, `categoria`) VALUES
-('Pro Plan Adulto 3kg',        'Alimento balanceado premium para perros adultos',     185.00, 12, 'https://d34xtejqjqcp3x.cloudfront.net/store/d3ed875c04ea93a088da60d182535b9f.webp', 'Alimento'),
-('Royal Canin Gato 1.5kg',     'Nutrición específica para gatos domésticos',          135.00,  8, 'https://d34xtejqjqcp3x.cloudfront.net/store/f890525b942c7e3f9734f4126749fac6.webp', 'Alimento'),
-('Shampoo Neutro 500ml',       'Shampoo suave sin parabenos para todo tipo de pelo',   35.00, 20, 'https://d34xtejqjqcp3x.cloudfront.net/store/a963e1560fdc2390924170fd0c7d0bed.webp', 'Higiene'),
-('Cepillo Desmallador',        'Reduce enredos y caída de pelo eficientemente',        28.00, 15, 'https://m.media-amazon.com/images/S/aplus-media-library-service-media/4eb844b5-caae-46e4-8811-09d5e8da4419.__AC_SR166,182___.jpg', 'Higiene'),
-('Cuerda Trenzada Resistente', 'Juguete dental de cuerda para perros medianos',        22.00, 30, 'https://m.media-amazon.com/images/I/81V3yf82dcL._AC_UF400,400_QL80_.jpg',            'Juguetes'),
-('Pelota Interactiva',         'Pelota con sonido para gatos y perros pequeños',       18.00, 25, 'https://media.falabella.com/falabellaPE/138428445_01/w=1500,h=1500,fit=cover',         'Juguetes'),
-('Plato Acero Inoxidable',     'Antideslizante, apto para lavavajillas',               30.00, 10, 'https://petkorp.com/wp-content/uploads/2023/02/AP-D003-043_2.webp',                   'Accesorios'),
-('Correa Retráctil 5m',        'Con freno de bloqueo y mango ergonómico',              65.00,  6, 'https://media.adeo.com/mkp/62680a51ac8de070d5a053670aee18e4/media.jpeg',               'Accesorios'),
-('Cama Acolchada Talla L',     'Relleno de fibra suave, funda lavable',               120.00,  4, 'https://tottoco.vtexassets.com/arquivos/ids/514234/PDCBCA1009.jpg',                    'Camas'),
-('Cama Cáscara de Nuez M',    'Diseño nórdico, antideslizante, súper suave',          95.00,  0, 'https://acdn-us.mitiendanube.com/stores/880/994/products/cama-nordico-pet-max-bbb870bbbc9c95738f17214116333463-1024-1024.webp', 'Camas');
+INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `categoria`) VALUES
+(1, 'Pro Plan Adulto 3kg', 'Alimento balanceado premium para perros adultos', 185.00, 12, 'https://d34xtejqjqcp3x.cloudfront.net/store/d3ed875c04ea93a088da60d182535b9f.webp', 'Alimento'),
+(2, 'Royal Canin Gato 1.5kg', 'Nutrición específica para gatos domésticos', 135.00, 8, 'https://d34xtejqjqcp3x.cloudfront.net/store/f890525b942c7e3f9734f4126749fac6.webp', 'Alimento'),
+(3, 'Shampoo Neutro 500ml', 'Shampoo suave sin parabenos para todo tipo de pelo', 35.00, 20, 'https://d34xtejqjqcp3x.cloudfront.net/store/a963e1560fdc2390924170fd0c7d0bed.webp', 'Higiene'),
+(4, 'Cepillo Desmallador', 'Reduce enredos y caída de pelo eficientemente', 28.00, 15, 'https://m.media-amazon.com/images/S/aplus-media-library-service-media/4eb844b5-caae-46e4-8811-09d5e8da4419.__AC_SR166,182___.jpg', 'Higiene'),
+(5, 'Cuerda Trenzada Resistente', 'Juguete dental de cuerda para perros medianos', 22.00, 30, 'https://m.media-amazon.com/images/I/81V3yf82dcL._AC_UF400,400_QL80_.jpg', 'Juguetes'),
+(6, 'Pelota Interactiva', 'Pelota con sonido para gatos y perros pequeños', 18.00, 25, 'https://media.falabella.com/falabellaPE/138428445_01/w=1500,h=1500,fit=cover', 'Juguetes'),
+(7, 'Plato Acero Inoxidable', 'Antideslizante, apto para lavavajillas', 30.00, 9, 'https://petkorp.com/wp-content/uploads/2023/02/AP-D003-043_2.webp', 'Accesorios'),
+(8, 'Correa Retráctil 5m', 'Con freno de bloqueo y mango ergonómico', 65.00, 6, 'https://media.adeo.com/mkp/62680a51ac8de070d5a053670aee18e4/media.jpeg', 'Accesorios'),
+(9, 'Cama Acolchada Talla L', 'Relleno de fibra suave, funda lavable', 120.00, 4, 'https://tottoco.vtexassets.com/arquivos/ids/514234/PDCBCA1009.jpg', 'Camas'),
+(10, 'Cama Cáscara de Nuez M', 'Diseño nórdico, antideslizante, súper suave', 95.00, 0, 'https://acdn-us.mitiendanube.com/stores/880/994/products/cama-nordico-pet-max-bbb870bbbc9c95738f17214116333463-1024-1024.webp', 'Camas');
 
 -- --------------------------------------------------------
 
@@ -275,7 +249,16 @@ CREATE TABLE `veterinarios` (
   `especialidad` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---dices para tablas volcadas
+--
+-- Volcado de datos para la tabla `veterinarios`
+--
+
+INSERT INTO `veterinarios` (`carnetVet`, `especialidad`) VALUES
+(555666, 'General'),
+(9244226, 'General');
+
+--
+-- Índices para tablas volcadas
 --
 
 --
@@ -378,13 +361,13 @@ ALTER TABLE `atenciones`
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes_mascotas`
 --
 ALTER TABLE `clientes_mascotas`
-  MODIFY `id_registroMasc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_registroMasc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `colores`
@@ -396,7 +379,7 @@ ALTER TABLE `colores`
 -- AUTO_INCREMENT de la tabla `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `especies`
@@ -408,13 +391,13 @@ ALTER TABLE `especies`
 -- AUTO_INCREMENT de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `razas`

@@ -119,3 +119,57 @@ document.addEventListener('DOMContentLoaded', function() {
         calendar.render();
     }
 });
+
+
+/*--- ------------ STATS--------------------*/
+function cargarStatsDashboard() {
+    fetch('php/get_dashboard_stats.php')
+        .then(res => res.json())
+        .then(data => {
+            // Actualizar los cuadros de Stats
+            document.getElementById('stat-mascotas-hoy').textContent = data.mascotas_hoy;
+            document.getElementById('stat-citas-pendientes').textContent = data.citas_pendientes;
+            document.getElementById('stat-total-clientes').textContent = data.total_clientes;
+            document.getElementById('stat-vacunas-pendientes').textContent = data.vacunas_pendientes;
+            
+            // Actualizar el pequeño label de "Próxima: 10:00 AM"
+            const labelProxima = document.querySelector('.stat-card.ambar .stat-change');
+            if(labelProxima) labelProxima.textContent = `Próxima: ${data.proxima_cita}`;
+        })
+        .catch(err => console.error("Error cargando stats:", err));
+}
+
+// Llamar a la función cuando cargue el documento
+document.addEventListener('DOMContentLoaded', () => {
+    cargarStatsDashboard();
+    // ... tus otras funciones (calendario, etc.)
+});
+
+
+function cargarProximasCitasLista() {
+    fetch('php/get_citas_vet.php')
+        .then(res => res.json())
+        .then(eventos => {
+            const cont = document.getElementById('contenedor-proximas-citas');
+            if (eventos.length === 0) {
+                cont.innerHTML = "<p style='padding:15px; color:gray;'>No hay citas en los próximos 4 días.</p>";
+                return;
+            }
+
+            cont.innerHTML = ""; 
+            eventos.forEach(cita => {
+                const hora = cita.start.split('T')[1].substring(0, 5);
+                const fecha = cita.fecha_formateada; // Usamos el nuevo campo
+
+                cont.innerHTML += `
+                    <div class="mascota-item">
+                        <div>
+                            <span style="color:var(--verde-vivo); font-weight:700; font-size:0.75rem;">[${fecha}]</span>
+                            <span style="font-weight:700;">${hora}</span> — ${cita.title}
+                            <span class="status-badge pendiente" style="margin-left:8px;">Consulta</span>
+                        </div>
+                        <span style="font-size:.8rem;color:var(--texto-suave);">${cita.description}</span>
+                    </div>`;
+            });
+        });
+}
