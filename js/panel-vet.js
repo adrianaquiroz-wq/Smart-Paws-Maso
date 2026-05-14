@@ -133,7 +133,7 @@ function cargarStatsDashboard() {
             document.getElementById('stat-mascotas-hoy').textContent = data.mascotas_hoy;
             document.getElementById('stat-citas-pendientes').textContent = data.citas_pendientes;
             document.getElementById('stat-total-clientes').textContent = data.total_clientes;
-            document.getElementById('stat-vacunas-pendientes').textContent = data.vacunas_pendientes;
+            document.getElementById('stat-total-animales').textContent = data.total_animales;
             
             // Actualizar la hora de la próxima cita
             const labelProxima = document.getElementById('label-proxima-cita');
