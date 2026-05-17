@@ -370,3 +370,39 @@ a{color:inherit;text-decoration:none;}
 .status-badge.pendiente{background:#fef3c7;color:#d97706;}
 .status-badge.completado{background:#dcfce7;color:#16a34a;}
 .status-badge.urgente{background:#fee2e2;color:#dc2626;}
+
+/* ESTILOS DEL CHATBOT */
+/* Paleta de colores */
+:root {
+  --sp-verde-oscuro: #152c1e;
+  --sp-naranja: #ee7c2a;
+  --sp-naranja-hover: #d36a20;
+  --sp-verde-claro: #8dc69f;
+  --sp-burbuja-usuario: #2a5236;
+  --sp-burbuja-bot: #f4f7f5;
+}
+/*Contenedor principal */
+.chatbot-container{position: fixed;bottom: 30px;right: 30px;z-index: 9999;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+/*Botón flotante */
+.chat-toggle-btn{width: 60px;height: 60px;background-color: var(--sp-naranja);color: white;border: none;border-radius: 50%;font-size: 24px;cursor: pointer;box-shadow: 0 4px 15px rgba(238, 124, 42, 0.4);transition: transform 0.3s, background-color 0.3s;}
+.chat-toggle-btn:hover{transform: scale(1.1);background-color: var(--sp-naranja-hover);}
+/*Ventana del chat */
+.chat-window{position: absolute;bottom: 80px;right: 0;width: 350px; height: 480px;background: white;border-radius: 12px;box-shadow: 0 8px 25px rgba(0,0,0,0.3);display: flex;flex-direction: column;overflow: hidden;transition: opacity 0.3s, visibility 0.3s, transform 0.3s;transform: translateY(0);}
+.chat-window.oculta{opacity: 0;visibility: hidden;transform: translateY(20px);}
+/*Cabecera */
+.chat-header{background-color: var(--sp-verde-oscuro);color: white;padding: 16px;display: flex;justify-content: space-between;align-items: center;font-weight: 600;border-bottom: 3px solid var(--sp-verde-claro);}
+.chat-header span{display: flex;align-items: center;gap: 8px;}
+.chat-header button{background: none;border: none;color: white;font-size: 18px;cursor: pointer;transition: color 0.2s;}
+.chat-header button:hover{color: var(--sp-naranja);}
+/*Cuerpo del chat */
+.chat-body{flex: 1;padding: 15px;overflow-y: auto;background-color: #ffffff;display: flex;flex-direction: column;gap: 12px;}
+/*Burbujas de mensaje */
+.mensaje{max-width: 85%;padding: 12px 16px;border-radius: 16px;font-size: 0.95rem;line-height: 1.4;}
+.mensaje.bot{background-color: var(--sp-burbuja-bot);color: #333;align-self: flex-start;border-bottom-left-radius: 4px;}
+.mensaje.usuario{background-color: var(--sp-burbuja-usuario);color: white;align-self: flex-end;border-bottom-right-radius: 4px;}
+/*Pie del chat*/
+.chat-footer{display: flex;padding: 12px;background: white;border-top: 1px solid #eee;align-items: center;gap: 10px;}
+.chat-footer input{flex: 1;padding: 12px 15px;border: 1px solid #ddd;border-radius: 25px;outline: none;font-size: 0.95rem;transition: border-color 0.3s;}
+.chat-footer input:focus{border-color: var(--sp-verde-claro);}
+.chat-footer button{background-color: var(--sp-naranja);width: 42px;height: 42px;border: none;border-radius: 50%;color: white;font-size: 16px;display: flex;justify-content: center;align-items: center;cursor: pointer;transition: background-color 0.2s, transform 0.2s;}
+.chat-footer button:hover{background-color: var(--sp-naranja-hover);transform: scale(1.05);}
