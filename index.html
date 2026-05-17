@@ -340,5 +340,22 @@
     const heroStats = document.querySelector('.hero-stats');
     if (heroStats) statsObserver.observe(heroStats);
   </script>
+  <!-- funcion chatbot -->
+  <div class="chatbot-container">
+    <button id="btn-toggle-chat" class="chat-toggle-btn"><i class="fas fa-comment-dots"></i></button>
+    <div id="chat-window" class="chat-window oculta">
+      <div class="chat-header">
+        <span>🐾 Asistente Veterinario</span>
+        <button id="btn-close-chat"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="chat-body" class="chat-body">
+        <div class="mensaje bot">¡Hola! ¿En qué puedo ayudarte a ti y a tu mascota?</div>
+      </div>
+      <div class="chat-footer">
+        <input type="text" id="input-chat" placeholder="Escribe aquí...">
+        <button id="btn-enviar-chat"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
