@@ -12,35 +12,88 @@
   <!-- Añadir en el head de panel-vet.html -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 <style>
-  #calendario {
-    max-width: 100%;
-    margin: 20px auto;
+/* ===== CALENDARIO GENERAL (DESKTOP) ===== */
+#calendario {
+    width: 100%;
     background: white;
     padding: 15px;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,.05);
 }
 
-/* Ajuste para que las celdas no sean muy altas */
+#calendario .fc {
+    width: 100%;
+}
+
+/* Altura para escritorio */
 .fc .fc-view-harness {
-    height: 500px !important;
+    min-height: 700px;
+    overflow: hidden ;
 }
 
-#contenedor-proximas-citas {
-    max-height: 300px;
-    overflow-y: auto;
-    padding-right: 5px;
-}
 
-/* Opcional: Hacer el scroll más estético */
-#contenedor-proximas-citas::-webkit-scrollbar {
-    width: 6px;
-}
-#contenedor-proximas-citas::-webkit-scrollbar-thumb {
-    background: #e0e0e0;
-    border-radius: 10px;
-}
+/* ===== MODALIDAD MÓVIL (PANTALLAS CHICAS) ===== */
+@media (max-width: 768px) {
 
+    #calendario {
+        width: 100% ;
+        max-width: 100% ;
+        padding: 10px;
+        /* Forzamos a que el contenedor principal corte el contenido extra y muestre el scroll */
+        overflow-x: auto ; 
+        overflow-y: visible ; 
+        -webkit-overflow-scrolling: touch; 
+    }
+
+    /* Ajustamos el contenedor interno de FullCalendar para móviles */
+    .fc .fc-view-harness {
+        min-height: 400px ; 
+        max-height: 500px ;
+        overflow: visible;
+    }
+
+    /* Forzar el ancho del calendario y sus tablas en 950px */
+    #calendario .fc,
+    #calendario table,
+    #calendario .fc-scroller,
+    #calendario .fc-view {
+        width: 950px ;
+        max-width: 950px ;
+        min-width: 950px ;
+    }
+
+    #calendario table {
+        table-layout: fixed;
+    }
+
+    /* Columnas fijas */
+    .fc .fc-daygrid-day,
+    .fc .fc-col-header-cell {
+        width: 135px ;
+        min-width: 135px ;
+    }
+
+    /* ===== FORZAR ESTILOS DE LA BARRA (CORREDIZO) ===== */
+    /* Usamos 'body' y selectores directos para asegurarnos de que el navegador no los ignore */
+    #calendario::-webkit-scrollbar {
+        height: 10px ; /* Un poco más gruesa para que se note */
+        display: block ;
+    }
+
+    #calendario::-webkit-scrollbar-track {
+        background: #f1f1f1 ; 
+        border-radius: 10px ;
+    }
+    
+    #calendario::-webkit-scrollbar-thumb {
+        background: #888 ; /* Más oscura para que resalte en el fondo claro */
+        border-radius: 10px ;
+    }
+
+    #calendario::-webkit-scrollbar-thumb:hover {
+        background: #555 ; 
+    }
+}
 
 </style>
 
